@@ -1,4 +1,4 @@
-package com.ch.test1;
+package com.ch.richbook;
 
 import java.text.DateFormat;
 import java.util.Date;
