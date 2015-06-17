@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <resultMap id="MemberResult" type="Member">
+    <result property="id" column="id"/>
+    <result property="pw" column="pw"/>
+    <result property="name" column="name"/>
+    <result property="birth" column="birth"/>
+    <result property="job" column="job"/>
+    <result property="gen" column="gen"/>    
+  </resultMap>
+   <!-- <select id="listAll" parameterType="Member" resultMap="MemberResult">
+    select * from emp
+    	<where>
+    		<if test="search=='job'"> 
+    			job like '%'||#{keyword}||'%'	</if>
+    		<if test="search=='deptno'"> 
+    			deptno like '%'||#{keyword}||'%' </if>
+    	</where>
+   	 order by empno 
+  </select> -->
+ <!--  <select id="detail" parameterType="int" resultType="Member">
+   	 select * from emp  where empno = #{empno}
+  </select> -->
+  <insert id="insert" parameterType="Member">
+	 insert into member values (#{id},#{pw},#{name},#{birth},
+	    #{job},#{gen})
+  </insert>
+  <!-- <update id="update" parameterType="Member">
+	 update emp set ename=#{ename},job=#{job},mgr=#{mgr},
+	    <if test="hiredate!=''">hiredate=#{hiredate},</if>
+	    sal=#{sal},
+	    <if test="comm!=null"> 	comm=#{comm},    </if>
+	    deptno=#{deptno} where empno=#{empno}
+  </update>
+  <delete id="delete" parameterType="int">
+    delete from emp where empno=#{empno}
+  </delete>  -->
+</mapper>
