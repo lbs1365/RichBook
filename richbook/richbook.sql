@@ -8,3 +8,4 @@ create table member (
 );
 select * from member;
 drop table member;
+

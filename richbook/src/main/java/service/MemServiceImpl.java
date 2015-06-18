@@ -12,5 +12,8 @@ public class MemServiceImpl implements MemService{
 	public int insert(Member mem) {		
 		return md.insert(mem);
 	}
+	public Member login(String id) {
+		return md.login(id);
+	}
 
 }

@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-// 	response.sendRedirect("memIn.do");	
- 	response.sendRedirect("loginform.do");	
-%>
+로긴
 </body>
 </html>

@@ -1,12 +1,12 @@
 package model;
 
 public class Member {
-	String id;
-	String pw;
-	String name;
-	String birth;
-	String job;
-	String gen;
+	private String id;
+	private String pw;
+	private String name;
+	private String birth;
+	private String job;
+	private String gen;
 	
 	public String getId() {
 		return id;

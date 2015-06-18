@@ -24,6 +24,9 @@
  <!--  <select id="detail" parameterType="int" resultType="Member">
    	 select * from emp  where empno = #{empno}
   </select> -->
+  <select id="login" parameterType="String" resultType="Member" >
+  	 select * from member where id = #{id} 
+  </select>
   <insert id="insert" parameterType="Member">
 	 insert into member values (#{id},#{pw},#{name},#{birth},
 	    #{job},#{gen})
