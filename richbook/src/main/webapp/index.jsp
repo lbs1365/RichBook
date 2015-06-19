@@ -9,7 +9,8 @@
 <body>
 <%
 // 	response.sendRedirect("memIn.do");	
- 	response.sendRedirect("loginform.do");	
+ 	/* response.sendRedirect("loginform.do"); */
+ 	response.sendRedirect("In.do");
 %>
 </body>
 </html>

@@ -9,3 +9,26 @@ create table member (
 select * from member;
 drop table member;
 
+create table intable (
+	inNo number primary key,
+	imtNo number,
+	inDate date,
+	inSum number,
+	inCon varchar2(50),
+	inEtc varchar2(50),
+	memNo number
+);
+
+insert into intable values ('1','1','2015.04.14','30000','회비','회식 회비','1');
+update intable set inCon = '월급', inEtc = '좋아요';
+select * from intable;
+
+create table inmet (
+	imtNo number primary key,
+	imtName varchar2(50)
+);
+
+insert into inmet values ('1','현금');
+insert into inmet values ('2','우리은행');
+insert into inmet values ('3','하나은행');
+insert into inmet values ('4','국민은행');

@@ -35,7 +35,7 @@
 			<select name="job">
 				<option value="worker">직장인</option>
 				<option value="student">학생</option>
-				<option value="player">백수</option>
+				<option value="player" selected="selected">백수</option>
 				<option value="etc">기타</option>
 			</select>
 		</td>

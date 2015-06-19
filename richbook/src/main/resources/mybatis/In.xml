@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="In">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="InResult" type="In">		
+		<result property="imtNo" column="imtNo" />
+		<result property="inDate" column="inDate" />
+		<result property="inSum" column="inSum" />
+		<result property="inCon" column="inCon" />
+		<result property="inEtc" column="inEtc" />
+		<result property="memNo" column="memNo" />
+	</resultMap>
+	<select id="inList" parameterType="int" resultMap="InResult">
+		select * from intable where memNo = #{memNo}
+	</select>	
+	<insert id="inUp" parameterType="In">
+	<selectKey order="BEFORE" keyProperty="inNo" resultType="int">
+  		select nvl(max(inNo),0)+1 inNo from intable
+  	</selectKey>
+		insert into intable values (#{inNo},#{imtNo},#{inDate},#{inSum},#{inCon},#{inEtc},#{memNo})
+	</insert>
+	<!-- <select id="detail" parameterType="int" resultType="Member">
+		select * from emp where empno = #{empno}
+	</select>
+	<select id="login" parameterType="String" resultType="Member">
+		select * from member where id = #{id}
+	</select>
+	<update id="update" parameterType="Member">
+		update emp set ename=#{ename},job=#{job},mgr=#{mgr},
+		<if test="hiredate!=''">hiredate=#{hiredate},</if>
+		sal=#{sal},
+		<if test="comm!=null"> comm=#{comm},    </if>
+		deptno=#{deptno} where empno=#{empno}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from emp where empno=#{empno}
+	</delete> -->
+</mapper>

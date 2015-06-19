@@ -3,9 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="Member" type="model.Member" />		
+		<typeAlias alias="Member" type="model.Member" />	
+		<typeAlias alias="In" type="model.In" />
+		<typeAlias alias="InMet" type="model.InMet" />		
 	</typeAliases>
 	<mappers>
-		<mapper resource="mybatis/Member.xml" />		
+		<mapper resource="mybatis/Member.xml" />
+		<mapper resource="mybatis/In.xml" />
+		<mapper resource="mybatis/InMet.xml" />				
 	</mappers>
 </configuration>
