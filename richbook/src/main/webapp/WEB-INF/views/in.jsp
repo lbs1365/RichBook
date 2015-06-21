@@ -10,6 +10,7 @@
 </head>
 <body>
 <h2>수입</h2>
+<a href="#" onclick="window.open('imtUp.do','분류 설정','width=800,height=800')">분류 설정</a>
 <form action="InUp.do" method="post">
 <table border="1">
 	<tr>
