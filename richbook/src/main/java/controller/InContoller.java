@@ -23,7 +23,7 @@ public class InContoller {
 	public String inList(Model model){
 		int memNo = 1;
 		List<In> inlist = ins.inList(memNo);
-		List<InMet> imtlist = imts.imtList();
+		List<InMet> imtlist = imts.imtList();		
 		model.addAttribute("inlist",inlist);
 		model.addAttribute("imtlist",imtlist);
 		return "in";		

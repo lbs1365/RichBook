@@ -1,8 +1,8 @@
 package model;
 
 public class InMet {
-	int imtNo;
-	String imtName;
+	private int imtNo;
+	private String imtName;
 	
 	public int getImtNo() {
 		return imtNo;

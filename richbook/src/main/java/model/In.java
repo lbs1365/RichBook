@@ -1,16 +1,14 @@
 package model;
 
-import java.util.Date;
 
 public class In {
 	private int inNo;
 	private int imtNo;
-	private Date inDate;
+	private String inDate;
 	private int inSum;
 	private String inCon;
 	private String inEtc;
 	private int memNo;
-	
 	public int getInNo() {
 		return inNo;
 	}
@@ -23,10 +21,10 @@ public class In {
 	public void setImtNo(int imtNo) {
 		this.imtNo = imtNo;
 	}
-	public Date getInDate() {
+	public String getInDate() {
 		return inDate;
 	}
-	public void setInDate(Date inDate) {
+	public void setInDate(String inDate) {
 		this.inDate = inDate;
 	}
 	public int getInSum() {
@@ -52,6 +50,7 @@ public class In {
 	}
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
-	}	
+	}
+	
 	
 }
