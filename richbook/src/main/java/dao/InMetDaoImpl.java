@@ -11,8 +11,14 @@ import model.InMet;
 public class InMetDaoImpl implements InMetDao{
 	@Autowired
 	SqlSession session;
-	public List<InMet> imtList() {
-		return session.selectList("InMetList");
+	public List<InMet> imtList(int memNo) {
+		return session.selectList("InMetList",memNo);
+	}
+	public int imtUp(InMet imt) {		
+		return session.insert("ImtUp",imt);
+	}
+	public InMet imtChk(InMet imt) {		
+		return session.selectOne("ImtChk", imt);
 	}
 
 }

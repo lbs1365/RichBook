@@ -2,32 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="InMet">
-  <!-- Use type aliases to avoid typing the full classname every time. -->
-  <resultMap id="InMetResult" type="InMet">
-    <result property="imtNo" column="imtNo"/>
-    <result property="imtName" column="imtName"/>      
-  </resultMap>
-   <select id="InMetList" resultMap="InMetResult">
-    select * from inmet
-  </select>
- <!--  <select id="detail" parameterType="int" resultType="Member">
-   	 select * from emp  where empno = #{empno}
-  </select> -->
-  <!-- <select id="login" parameterType="String" resultType="Member" >
-  	 select * from member where id = #{id} 
-  </select>
-  <insert id="insert" parameterType="Member">
-	 insert into member values (#{id},#{pw},#{name},#{birth},
-	    #{job},#{gen})
-  </insert> -->
-  <!-- <update id="update" parameterType="Member">
-	 update emp set ename=#{ename},job=#{job},mgr=#{mgr},
-	    <if test="hiredate!=''">hiredate=#{hiredate},</if>
-	    sal=#{sal},
-	    <if test="comm!=null"> 	comm=#{comm},    </if>
-	    deptno=#{deptno} where empno=#{empno}
-  </update>
-  <delete id="delete" parameterType="int">
-    delete from emp where empno=#{empno}
-  </delete>  -->
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="InMetResult" type="InMet">
+		<result property="imtNo" column="imtNo" />
+		<result property="imtName" column="imtName" />
+		<result property="memNo" column="memNo" />
+	</resultMap>
+	<select id="InMetList" parameterType="int" resultMap="InMetResult">
+		select * from inmet where memNo=#{memNo}
+	</select>
+	<select id="ImtChk" parameterType="InMet" resultMap="InMetResult">
+		select * from inmet where memNo=#{memNo} and imtName=#{imtName}
+	</select>
+	<insert id="ImtUp" parameterType="InMet">
+		<selectKey order="BEFORE" keyProperty="imtNo" resultType="int">
+			select nvl(max(imtNo),0)+1 imtNo from inmet
+		</selectKey>
+		insert into inmet values (#{imtNo},#{imtName},#{memNo})
+	</insert>
 </mapper>

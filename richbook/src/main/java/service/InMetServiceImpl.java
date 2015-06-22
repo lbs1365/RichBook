@@ -11,8 +11,14 @@ import model.InMet;
 public class InMetServiceImpl implements InMetService{
 	@Autowired
 	InMetDao imd;
-	public List<InMet> imtList() {		
-		return imd.imtList();
+	public List<InMet> imtList(int memNo) {		
+		return imd.imtList(memNo);
+	}
+	public int imtUp(InMet imt) {		
+		return imd.imtUp(imt);
+	}
+	public InMet imtChk(InMet imt) {		
+		return imd.imtChk(imt);
 	}
 
 }

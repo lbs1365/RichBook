@@ -27,12 +27,15 @@ select * from intable;
 
 create table inmet (
 	imtNo number primary key,
-	imtName varchar2(50)
+	imtName varchar2(50),
+	memNo number
 );
 
-insert into inmet values ('1','현금');
-insert into inmet values ('2','우리은행');
-insert into inmet values ('3','하나은행');
-insert into inmet values ('4','국민은행');
+drop table inmet;
+
+insert into inmet values ('1','현금','1');
+insert into inmet values ('2','우리은행','1');
+insert into inmet values ('3','하나은행','1');
+insert into inmet values ('4','국민은행','1');
 
 select * from inmet;
