@@ -23,7 +23,7 @@
 				<th>내역</th>
 				<th>기타</th>
 			</tr>
-			<c:set var="i" value="${inlist.size() }" />
+			<c:set var="i" value="${inlist.size() }" />			
 			<c:forEach var="inlist" items="${inlist }">
 				<tr>
 					<td>${i }</td>
@@ -35,6 +35,7 @@
 					<td>${inlist.inCon }</td>
 					<td>${inlist.inEtc }</td>
 				</tr>
+				<c:set var="i" value="${i-1 }" />				
 			</c:forEach>
 			<tr>
 				<td>${inlist.size()+1 }</td>
@@ -47,11 +48,9 @@
 				<td><input type="number" name="inSum" required="required"></td>
 				<td><input type="text" name="inCon"></td>
 				<td><input type="text" name="inEtc"></td>
-			</tr>
-			<tr>
-				<td colspan="6"><input type="submit" value="추가"></td>
-			</tr>
+			</tr>			
 		</table>
+		<input type="submit" value="추가">
 	</form>
 </body>
 </html>
