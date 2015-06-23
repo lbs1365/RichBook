@@ -12,10 +12,13 @@ import org.springframework.stereotype.Repository;
 public class InDaoImpl implements InDao{
 	@Autowired
 	private SqlSession session;
-	public List<In> inList (int memNo) {		
-		return session.selectList("inList", memNo);	
+	public List<In> inList (In in) {		
+		return session.selectList("InList", in);	
 	}	
-	public void inUp(In in) {
-		session.insert("inUp", in);
+	public void inInsert(In in) {
+		session.insert("InInsert", in);
+	}
+	public void inDel(int inNo) {
+		session.delete("InDel", inNo);
 	}
 }

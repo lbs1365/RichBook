@@ -20,18 +20,19 @@ public class InContoller {
 	@Autowired
 	InMetService imts;
 	@RequestMapping(value="In")
-	public String inList(Model model){
-		int memNo = 1;
-		List<In> inlist = ins.inList(memNo);
-		List<InMet> imtlist = imts.imtList(memNo);		
+	public String inList(In in, Model model){
+		in.setMemNo(1);
+		List<In> inlist = ins.inList(in);
+		List<InMet> imtlist = imts.imtList(in.getMemNo());
+		model.addAttribute("in",in);
 		model.addAttribute("inlist",inlist);
 		model.addAttribute("imtlist",imtlist);
 		return "in";		
 	}
-	@RequestMapping(value="InUp")
-	public String inUp(In in, Model model){		
+	@RequestMapping(value="InInsert")
+	public String inInsert(In in, Model model){		
 		in.setMemNo(1);
-		ins.inUp(in);
+		ins.inInsert(in);
 		return "redirect:In.do";
 	}
 	@RequestMapping(value="ImtUpList")
@@ -53,5 +54,15 @@ public class InContoller {
 			model.addAttribute("msg",msg);
 			return "forward:ImtUpList.do";			
 		}		
+	}
+	@RequestMapping(value="InDel")
+	public String inDel(int inNo, Model model){		
+		ins.inDel(inNo);
+		return "redirect:In.do";
+	}
+	@RequestMapping(value="ImtDel")
+	public String imtDel(int imtNo, Model model){		
+		imts.imtDel(imtNo);
+		return "forward:ImtUpList.do";
 	}
 }

@@ -20,5 +20,8 @@ public class InMetServiceImpl implements InMetService{
 	public InMet imtChk(InMet imt) {		
 		return imd.imtChk(imt);
 	}
+	public void imtDel(int imtNo) {
+		imd.imtDel(imtNo);
+	}
 
 }

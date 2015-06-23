@@ -13,10 +13,13 @@ import dao.InDao;
 public class InServiceImpl implements InService{
 	@Autowired
 	InDao ind;
-	public List<In> inList(int memNo) {		
-		return ind.inList(memNo);
+	public List<In> inList(In in) {		
+		return ind.inList(in);
 	}
-	public void inUp(In in) {
-		ind.inUp(in);
+	public void inInsert(In in) {
+		ind.inInsert(in);
+	}
+	public void inDel(int inNo) {
+		ind.inDel(inNo);
 	}
 }

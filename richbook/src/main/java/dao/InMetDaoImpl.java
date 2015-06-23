@@ -20,5 +20,8 @@ public class InMetDaoImpl implements InMetDao{
 	public InMet imtChk(InMet imt) {		
 		return session.selectOne("ImtChk", imt);
 	}
+	public void imtDel(int imtNo) {		
+		session.delete("ImtDel", imtNo);
+	}
 
 }

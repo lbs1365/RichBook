@@ -8,4 +8,5 @@ public interface InMetService {
 	List<InMet> imtList (int memNo);
 	int imtUp (InMet imt);
 	InMet imtChk (InMet imt);
+	void imtDel (int imtNo);
 }

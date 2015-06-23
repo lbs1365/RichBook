@@ -9,17 +9,52 @@
 		<result property="inSum" column="inSum" />
 		<result property="inCon" column="inCon" />
 		<result property="inEtc" column="inEtc" />
-		<result property="memNo" column="memNo" />
+		<result property="memNo" column="memNo" />		
 	</resultMap>
-	<select id="inList" parameterType="int" resultMap="InResult">
-		select * from intable where memNo = #{memNo} order by inDate desc
+	<select id="InList" parameterType="In" resultMap="InResult">
+		select * from intable where memNo = #{memNo}
+			<if test="inSort==null || inSort=='inDate'">				
+				<if test="inArr==null || inArr=='Desc'">
+					order by inDate desc
+				</if>
+				<if test="inArr=='Asc'">
+					order by inDate
+				</if> 
+			</if>
+			<if test="inSort=='imtNo'">				
+				<if test="inArr=='Desc'">
+					order by imtNo desc
+				</if>
+				<if test="inArr=='Asc'">
+					order by imtNo
+				</if> 
+			</if>
+			<if test="inSort=='inSum'">				
+				<if test="inArr=='Desc'">
+					order by inSum desc
+				</if>
+				<if test="inArr=='Asc'">
+					order by inSum
+				</if> 
+			</if>	
+			<if test="inSort=='inCon'">				
+				<if test="inArr=='Desc'">
+					order by inCon desc
+				</if>
+				<if test="inArr=='Asc'">
+					order by inCon
+				</if> 
+			</if>						
 	</select>	
-	<insert id="inUp" parameterType="In">
+	<insert id="InInsert" parameterType="In">
 	<selectKey order="BEFORE" keyProperty="inNo" resultType="int">
   		select nvl(max(inNo),0)+1 inNo from intable
   	</selectKey>
 		insert into intable values (#{inNo},#{imtNo},#{inDate},#{inSum},#{inCon},#{inEtc},1)
 	</insert>
+	<delete id="InDel" parameterType="int">
+		delete from intable where inNo=#{inNo}
+	</delete>
 	<!-- <select id="detail" parameterType="int" resultType="Member">
 		select * from emp where empno = #{empno}
 	</select>
@@ -33,7 +68,5 @@
 		<if test="comm!=null"> comm=#{comm},    </if>
 		deptno=#{deptno} where empno=#{empno}
 	</update>
-	<delete id="delete" parameterType="int">
-		delete from emp where empno=#{empno}
-	</delete> -->
+	 -->
 </mapper>

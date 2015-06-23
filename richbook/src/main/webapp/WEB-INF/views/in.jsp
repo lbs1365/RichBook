@@ -7,21 +7,107 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.js"/>"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.inDel').css('cursor', 'pointer');
+		$('.inDel').click(function() {
+			var inNo = $(this).attr('id');
+			location.href='InDel.do?inNo='+inNo;
+		});
+		$('.inDate').css('cursor', 'pointer');
+		$('.inDate').click(function() {
+			var inSort = $(this).attr('class');
+			var inArr = $(this).attr('id');			
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+		});
+		$('.imtNo').css('cursor', 'pointer');
+		$('.imtNo').click(function() {
+			var inSort = $(this).attr('class');
+			var inArr = $(this).attr('id');			
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+		});	
+		$('.inSum').css('cursor', 'pointer');
+		$('.inSum').click(function() {
+			var inSort = $(this).attr('class');
+			var inArr = $(this).attr('id');			
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+		});	
+		$('.inCon').css('cursor', 'pointer');
+		$('.inCon').click(function() {
+			var inSort = $(this).attr('class');
+			var inArr = $(this).attr('id');			
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+		});	
+	});	
+</script>
 </head>
 <body>
 	<h2>수입</h2>
 	<a href="#"
 		onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류
-		설정</a>
-	<form action="InUp.do" method="post">
+		설정</a><br>			
+	<form action="InInsert.do" method="post">
 		<table border="1">
 			<tr>
-				<th>No
-				<th>날짜</th>
-				<th>분류</th>
-				<th>금액</th>
-				<th>내역</th>
-				<th>기타</th>
+				<th>No</th>				
+				<c:if test="${in.inSort == null || in.inSort.equals('inDate')}">
+					<th>
+						<c:if test="${in.inArr == null}">
+							<div class="inDate" id="Asc">날짜 ▼</div>
+						</c:if>
+						<c:if test="${in.inArr.equals('Desc')}">
+							<div class="inDate" id="Asc">날짜 ▼</div>
+						</c:if>
+						<c:if test="${in.inArr.equals('Asc')}">
+							<div class="inDate" id="Desc">날짜 ▲</div>
+						</c:if>						
+					</th>
+					<th><div class="imtNo" id="Desc">분류</div></th>
+					<th><div class="inSum" id="Desc">금액</div></th>
+					<th><div class="inCon" id="Desc">내역</div></th>			
+				</c:if>								
+				<c:if test="${in.inSort.equals('imtNo')}">
+					<th><div class="inDate" id="Desc">날짜</div></th>
+					<th>
+						<c:if test="${in.inArr.equals('Desc')}">
+							<div class="imtNo" id="Asc">분류 ▼</div>
+						</c:if>
+						<c:if test="${in.inArr.equals('Asc')}">
+							<div class="imtNo" id="Desc">분류 ▲</div>
+						</c:if>
+					</th>
+					<th><div class="inSum" id="Desc">금액</div></th>
+					<th><div class="inCon" id="Desc">내역</div></th>			
+				</c:if>
+				<c:if test="${in.inSort.equals('inSum')}">
+					<th><div class="inDate" id="Desc">날짜</div></th>	
+					<th><div class="imtNo" id="Desc">분류</div></th>		
+					<th>
+						<c:if test="${in.inArr.equals('Desc')}">
+							<div class="inSum" id="Asc">금액 ▼</div>
+						</c:if>
+						<c:if test="${in.inArr.equals('Asc')}">
+							<div class="inSum" id="Desc">금액 ▲</div>
+						</c:if>
+					</th>
+					<th><div class="inCon" id="Desc">내역</div></th>
+				</c:if>
+				<c:if test="${in.inSort.equals('inCon')}">
+					<th><div class="inDate" id="Desc">날짜</div></th>
+					<th><div class="imtNo" id="Desc">분류</div></th>
+					<th><div class="inSum" id="Desc">금액</div></th>
+					<th>
+						<c:if test="${in.inArr.equals('Desc')}">
+							<div class="inCon" id="Asc">내역 ▼</div>
+						</c:if>
+						<c:if test="${in.inArr.equals('Asc')}">
+							<div class="inCon" id="Desc">내역 ▲</div>
+						</c:if>
+					</th>
+				</c:if>
+				<th>기타</th>				
+				<th>삭제</th>
 			</tr>
 			<c:set var="i" value="${inlist.size() }" />			
 			<c:forEach var="inlist" items="${inlist }">
@@ -33,24 +119,25 @@
 						</c:forEach></td>
 					<td><fmt:formatNumber pattern="#,###">${inlist.inSum }</fmt:formatNumber>원</td>
 					<td>${inlist.inCon }</td>
-					<td>${inlist.inEtc }</td>
+					<td>${inlist.inEtc }</td>					
+					<td align="center"><div class="inDel" id="${inlist.inNo}">x</div></td>
 				</tr>
 				<c:set var="i" value="${i-1 }" />				
 			</c:forEach>
 			<tr>
-				<td>${inlist.size()+1 }</td>
+				<td>입력</td>
 				<td><input type="date" name="inDate" required="required"></td>
 				<td><select name="imtNo">
 						<c:forEach var="imtlist" items="${imtlist }">
 							<option value="${imtlist.imtNo }">${imtlist.imtName }</option>
 						</c:forEach>
 				</select></td>
-				<td><input type="number" name="inSum" required="required"></td>
+				<td><input type="number" name="inSum" min="0" required="required"></td>
 				<td><input type="text" name="inCon"></td>
 				<td><input type="text" name="inEtc"></td>
+				<td><input type="submit" value="추가"></td>
 			</tr>			
-		</table>
-		<input type="submit" value="추가">
+		</table>		
 	</form>
 </body>
 </html>

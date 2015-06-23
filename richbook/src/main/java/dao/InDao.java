@@ -5,6 +5,7 @@ import java.util.List;
 import model.In;
 
 public interface InDao {
-	List<In> inList (int memNo);
-	void inUp (In in);
+	List<In> inList (In in);
+	void inInsert (In in);
+	void inDel (int inNo);
 }

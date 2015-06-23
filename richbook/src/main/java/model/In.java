@@ -5,10 +5,14 @@ public class In {
 	private int inNo;
 	private int imtNo;
 	private String inDate;
-	private int inSum;
+	private long inSum;
 	private String inCon;
 	private String inEtc;
 	private int memNo;
+	
+	private String inArr;
+	private String inSort;
+	
 	public int getInNo() {
 		return inNo;
 	}
@@ -27,10 +31,10 @@ public class In {
 	public void setInDate(String inDate) {
 		this.inDate = inDate;
 	}
-	public int getInSum() {
+	public long getInSum() {
 		return inSum;
 	}
-	public void setInSum(int inSum) {
+	public void setInSum(long inSum) {
 		this.inSum = inSum;
 	}
 	public String getInCon() {
@@ -51,6 +55,17 @@ public class In {
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
-	
+	public String getInArr() {
+		return inArr;
+	}
+	public void setInArr(String inArr) {
+		this.inArr = inArr;
+	}
+	public String getInSort() {
+		return inSort;
+	}
+	public void setInSort(String inSort) {
+		this.inSort = inSort;
+	}
 	
 }
