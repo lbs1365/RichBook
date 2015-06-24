@@ -19,34 +19,59 @@
 		$('.inDate').click(function() {
 			var inSort = $(this).attr('class');
 			var inArr = $(this).attr('id');			
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();		
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
 		});
 		$('.imtNo').css('cursor', 'pointer');
 		$('.imtNo').click(function() {
 			var inSort = $(this).attr('class');
-			var inArr = $(this).attr('id');			
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+			var inArr = $(this).attr('id');
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
 		});	
 		$('.inSum').css('cursor', 'pointer');
 		$('.inSum').click(function() {
 			var inSort = $(this).attr('class');
-			var inArr = $(this).attr('id');			
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
+			var inArr = $(this).attr('id');
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
 		});	
 		$('.inCon').css('cursor', 'pointer');
 		$('.inCon').click(function() {
 			var inSort = $(this).attr('class');
-			var inArr = $(this).attr('id');			
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort;
-		});	
+			var inArr = $(this).attr('id');	
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
+		});
+		$(':radio[name="inListPrint"]').click(function() {
+			var inListPrint = $(this).val();
+			location.href='inListPrint='+inListPrint;
+		});
 	});	
 </script>
 </head>
 <body>
-	<h2>수입</h2>
-	<a href="#"
-		onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류
-		설정</a><br>			
+	<h2>수입</h2>	
+	<input type="radio" name="inListPrint" value="All" 
+		<c:if test="${in.inListPrint == null || in.inListPrint.equals('All')}">
+		checked="checked"</c:if>>전체
+	<input type="radio" name="inListPrint" value="Week"
+		<c:if test="${in.inListPrint.equals('Week')}">
+		checked="checked"</c:if>>7일
+	<input type="radio" name="inListPrint" value="Month" 
+		<c:if test="${in.inListPrint.equals('Month')}">
+		checked="checked"</c:if>>30일
+	<input type="radio" name="inListPrint" value="ThreeMonth" 
+		<c:if test="${in.inListPrint.equals('ThreeMonth')}">
+		checked="checked"</c:if>>90일
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	<a href="#"	onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류 설정</a>
+	<br>			
 	<form action="InInsert.do" method="post">
 		<table border="1">
 			<tr>
@@ -139,5 +164,6 @@
 			</tr>			
 		</table>		
 	</form>
+	${in.inListPrintCal }
 </body>
 </html>

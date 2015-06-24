@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import service.CalService;
 import service.InMetService;
 import service.InService;
 
@@ -19,11 +20,16 @@ public class InContoller {
 	InService ins;
 	@Autowired
 	InMetService imts;
+	@Autowired
+	CalService cs;
 	@RequestMapping(value="In")
 	public String inList(In in, Model model){
 		in.setMemNo(1);
 		List<In> inlist = ins.inList(in);
 		List<InMet> imtlist = imts.imtList(in.getMemNo());
+		if(in.getInListPrint()!=null){
+			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
+		}
 		model.addAttribute("in",in);
 		model.addAttribute("inlist",inlist);
 		model.addAttribute("imtlist",imtlist);

@@ -12,6 +12,8 @@ public class In {
 	
 	private String inArr;
 	private String inSort;
+	private String inListPrint;	
+	private String inListPrintCal;
 	
 	public int getInNo() {
 		return inNo;
@@ -66,6 +68,18 @@ public class In {
 	}
 	public void setInSort(String inSort) {
 		this.inSort = inSort;
+	}
+	public String getInListPrint() {
+		return inListPrint;
+	}
+	public void setInListPrint(String inListPrint) {
+		this.inListPrint = inListPrint;
+	}
+	public String getInListPrintCal() {
+		return inListPrintCal;
+	}
+	public void setInListPrintCal(String inListPrintCal) {
+		this.inListPrintCal = inListPrintCal;
 	}
 	
 }
