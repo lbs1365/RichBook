@@ -25,11 +25,13 @@ public class InContoller {
 	@RequestMapping(value="In")
 	public String inList(In in, Model model){
 		in.setMemNo(1);
+		if(in.getInListPrint()==null || in.getInListPrint().equals("") || in.getInListPrint().equals("All")){
+			in.setInListPrintCal("null");
+		}else{
+			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
+		}			
 		List<In> inlist = ins.inList(in);
 		List<InMet> imtlist = imts.imtList(in.getMemNo());
-		if(in.getInListPrint()!=null){
-			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
-		}
 		model.addAttribute("in",in);
 		model.addAttribute("inlist",inlist);
 		model.addAttribute("imtlist",imtlist);

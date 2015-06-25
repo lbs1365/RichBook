@@ -12,7 +12,13 @@
 		<result property="memNo" column="memNo" />		
 	</resultMap>
 	<select id="InList" parameterType="In" resultMap="InResult">
-		select * from intable where memNo = #{memNo}
+		select * from intable
+		<where>
+    		<if test="inListPrintCal == 'null'"> 
+    			memNo = #{memNo} </if>
+    		<if test="inListPrintCal != 'null'"> 
+    			<![CDATA[ memNo = #{memNo} and inDate >= #{inListPrintCal} ]]> </if>
+    	</where>
 			<if test="inSort==null || inSort=='inDate'">				
 				<if test="inArr==null || inArr=='Desc'">
 					order by inDate desc

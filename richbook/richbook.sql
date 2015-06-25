@@ -12,7 +12,7 @@ drop table member;
 create table intable (
 	inNo number primary key,
 	imtNo number,
-	inDate varchar2(50),
+	inDate Date,
 	inSum number,
 	inCon varchar2(50),
 	inEtc varchar2(50),

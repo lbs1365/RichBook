@@ -45,7 +45,7 @@
 		});
 		$(':radio[name="inListPrint"]').click(function() {
 			var inListPrint = $(this).val();
-			location.href='inListPrint='+inListPrint;
+			location.href='In.do?inListPrint='+inListPrint;
 		});
 	});	
 </script>
@@ -69,7 +69,7 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
 	<a href="#"	onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류 설정</a>
 	<br>			
 	<form action="InInsert.do" method="post">
@@ -138,7 +138,10 @@
 			<c:forEach var="inlist" items="${inlist }">
 				<tr>
 					<td>${i }</td>
-					<td>${inlist.inDate }</td>
+					<td>
+						<fmt:parseDate value="${inlist.inDate }" pattern ="yyyy-MM-dd" var="date"/>						
+						<fmt:formatDate value="${date}" pattern="yyyy-MM-dd" />
+					</td>
 					<td><c:forEach var="imtlist" items="${imtlist }">
 							<c:if test="${inlist.imtNo == imtlist.imtNo }">${imtlist.imtName }</c:if>
 						</c:forEach></td>
@@ -158,12 +161,11 @@
 						</c:forEach>
 				</select></td>
 				<td><input type="number" name="inSum" min="0" required="required"></td>
-				<td><input type="text" name="inCon"></td>
+				<td><input type="text" name="inCon" required="required"></td>
 				<td><input type="text" name="inEtc"></td>
 				<td><input type="submit" value="추가"></td>
 			</tr>			
 		</table>		
-	</form>
-	${in.inListPrintCal }
+	</form>	
 </body>
 </html>
