@@ -15,9 +15,11 @@
 		select * from intable
 		<where>
     		<if test="inListPrintCal == 'null'"> 
-    			memNo = #{memNo} </if>
+    			memNo = #{memNo}    			
+    		</if>
     		<if test="inListPrintCal != 'null'"> 
-    			<![CDATA[ memNo = #{memNo} and inDate >= #{inListPrintCal} ]]> </if>
+    			<![CDATA[ memNo = #{memNo} and inDate >= #{inListPrintCal} ]]> 
+    		</if>
     	</where>
 			<if test="inSort==null || inSort=='inDate'">				
 				<if test="inArr==null || inArr=='Desc'">
@@ -51,7 +53,11 @@
 					order by inCon
 				</if> 
 			</if>						
-	</select>	
+	</select>
+	<select id="inYearMonth_year" parameterType="In" resultType="int">		
+		select count(inDate) from intable where memNo = #{memNo} 
+			and inDate between #{inYear}||'-01-01' and #{inYear}||'-12-31'
+	</select>
 	<insert id="InInsert" parameterType="In">
 	<selectKey order="BEFORE" keyProperty="inNo" resultType="int">
   		select nvl(max(inNo),0)+1 inNo from intable

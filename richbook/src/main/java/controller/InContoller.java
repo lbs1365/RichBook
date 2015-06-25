@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.In;
@@ -11,12 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import service.CalService;
-import service.CalServiceImpl;
 import service.InMetService;
 import service.InService;
 
 @Controller
-public class InContoller {
+public class InContoller {	
 	@Autowired
 	InService ins;
 	@Autowired
@@ -28,6 +28,20 @@ public class InContoller {
 		in.setMemNo(1);
 		if(in.getInListPrint()==null || in.getInListPrint().equals("") || in.getInListPrint().equals("All")){
 			in.setInListPrintCal("null");
+		}else if(in.getInListPrint().equals("YearMonth")){
+			in.setInListPrintCal("null");
+			in.setInYearMonth(in.getInListPrint());
+			int year = cs.inYearMonthListPrintCal(in.getInListPrint());
+			List<String> YearMonth_yearList = new ArrayList<String>();  
+			while(true){
+				in.setInYear(year);				
+				int result = ins.inYearMonth(in);				
+				if(result == 0)break;
+				String yearList = year +"";
+				YearMonth_yearList.add(yearList);
+				year --;					
+			}
+			model.addAttribute("year",YearMonth_yearList);
 		}else{
 			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
 		}			

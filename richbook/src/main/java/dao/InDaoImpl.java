@@ -21,4 +21,7 @@ public class InDaoImpl implements InDao{
 	public void inDel(int inNo) {
 		session.delete("InDel", inNo);
 	}
+	public int inYearMonth(In in) {		
+		return session.selectOne("inYearMonth_year", in);
+	}
 }

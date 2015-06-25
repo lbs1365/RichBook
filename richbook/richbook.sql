@@ -39,3 +39,5 @@ insert into inmet values ('3','하나은행','1');
 insert into inmet values ('4','국민은행','1');
 
 select * from inmet;
+
+select count(inDate) from intable where memNo = 1 and inDate between '2015-01-01' and '2015-12-31' 

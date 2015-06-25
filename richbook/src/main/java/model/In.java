@@ -14,6 +14,8 @@ public class In {
 	private String inSort;
 	private String inListPrint;	
 	private String inListPrintCal;
+	private String inYearMonth;
+	private int inYear;
 	
 	public int getInNo() {
 		return inNo;
@@ -81,5 +83,16 @@ public class In {
 	public void setInListPrintCal(String inListPrintCal) {
 		this.inListPrintCal = inListPrintCal;
 	}
-	
+	public String getInYearMonth() {
+		return inYearMonth;
+	}
+	public void setInYearMonth(String inYearMonth) {
+		this.inYearMonth = inYearMonth;
+	}
+	public int getInYear() {
+		return inYear;
+	}
+	public void setInYear(int inYear) {
+		this.inYear = inYear;
+	}	
 }
