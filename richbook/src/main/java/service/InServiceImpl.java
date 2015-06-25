@@ -22,7 +22,10 @@ public class InServiceImpl implements InService{
 	public void inDel(int inNo) {
 		ind.inDel(inNo);
 	}
-	public int inYearMonth(In in) {
-		return ind.inYearMonth(in);
+	public int inYearMonth_year (In in) {
+		return ind.inYearMonth_year(in);
+	}	
+	public int inYearMonth_month (In in) {
+		return ind.inYearMonth_month(in);
 	}
 }

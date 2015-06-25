@@ -31,17 +31,31 @@ public class InContoller {
 		}else if(in.getInListPrint().equals("YearMonth")){
 			in.setInListPrintCal("null");
 			in.setInYearMonth(in.getInListPrint());
-			int year = cs.inYearMonthListPrintCal(in.getInListPrint());
-			List<String> YearMonth_yearList = new ArrayList<String>();  
-			while(true){
-				in.setInYear(year);				
-				int result = ins.inYearMonth(in);				
-				if(result == 0)break;
-				String yearList = year +"";
-				YearMonth_yearList.add(yearList);
-				year --;					
-			}
-			model.addAttribute("year",YearMonth_yearList);
+			if(in.getInYearMonth_year()!=0){				
+				List<String> YearMonth_monthList = new ArrayList<String>();
+				YearMonth_monthList.add("달 선택");
+				for(int i=1;i<=12;i++){
+					in.setInMonth(i);
+					int result = ins.inYearMonth_month(in);
+					if(result > 0){
+						String monthList = i +"";
+						YearMonth_monthList.add(monthList);
+					}
+				}
+				model.addAttribute("month",YearMonth_monthList);
+			}else{				
+				int year = cs.inYearMonthListPrintCal(in.getInListPrint());
+				List<String> YearMonth_yearList = new ArrayList<String>();
+				while(true){
+					in.setInYear(year);				
+					int result = ins.inYearMonth_year(in);				
+					if(result == 0)break;
+					String yearList = year +"";
+					YearMonth_yearList.add(yearList);
+					year --;					
+				}
+				model.addAttribute("year",YearMonth_yearList);				
+			}			
 		}else{
 			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
 		}			

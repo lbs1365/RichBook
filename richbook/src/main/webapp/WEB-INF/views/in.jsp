@@ -68,17 +68,18 @@
 		<c:if test="${in.inListPrint.equals('YearMonth')}">
 		checked="checked"</c:if>>년&amp;월
 	<c:if test="${in.inListPrint.equals('YearMonth')}">	
-		<select name="YearMonth_year">		
+		<select name="inYearMonth_year">		
 			<c:forEach var="year" items="${year }">
-				<option value="${year}">${year}</option>			
+				<option value="${year}">${year}</option>
 			</c:forEach>
 		</select>
-	</c:if>
-	<c:if test="">
-		<select name="YearMonth_month">
-			<option value=""></option>
+		<select name="inYearMonth_month">
+			<c:forEach var="month" items="${month }">
+				<option value="${month}">${month}</option>
+			</c:forEach>
 		</select>
-	</c:if>
+	</c:if>	
+	
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -8,5 +8,6 @@ public interface InService {
 	List<In> inList(In in);
 	void inInsert(In in);
 	void inDel(int inNo);
-	int inYearMonth (In in);
+	int inYearMonth_year (In in);
+	int inYearMonth_month (In in);
 }
