@@ -60,7 +60,8 @@
 	</select>
 	<select id="InYearMonth_month" parameterType="In" resultType="int">		
 		select count(inDate) from intable where memNo = #{memNo} 
-			and inDate between #{inYearMonth_year}||'-'||#{inMonth}||'-01' and #{inYearMonth_year}||'-'||#{inMonth}||'-31'
+			and inDate between #{inYearMonth_year}||'-'||#{inMonth}||'-01' 
+				and #{inYearMonth_year}||'-'||#{inMonth}||'-'||#{inDay}
 	</select>
 	<insert id="InInsert" parameterType="In">
 	<selectKey order="BEFORE" keyProperty="inNo" resultType="int">

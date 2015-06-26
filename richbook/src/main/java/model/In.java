@@ -14,11 +14,12 @@ public class In {
 	private String inSort;
 	private String inListPrint;	
 	private String inListPrintCal;
-	private String inYearMonth;	
+	private String inYearMonth;
 	private int inYear;
-	private int inMonth;
+	private String inMonth;
+	private String inDay;
 	private int inYearMonth_year;
-	private int inYearMonth_month;
+	private String inYearMonth_month;
 	
 	public int getInNo() {
 		return inNo;
@@ -98,10 +99,10 @@ public class In {
 	public void setInYear(int inYear) {
 		this.inYear = inYear;
 	}
-	public int getInMonth() {
+	public String getInMonth() {
 		return inMonth;
 	}
-	public void setInMonth(int inMonth) {
+	public void setInMonth(String inMonth) {
 		this.inMonth = inMonth;
 	}
 	public int getInYearMonth_year() {
@@ -110,10 +111,16 @@ public class In {
 	public void setInYearMonth_year(int inYearMonth_year) {
 		this.inYearMonth_year = inYearMonth_year;
 	}
-	public int getInYearMonth_month() {
+	public String getInYearMonth_month() {
 		return inYearMonth_month;
 	}
-	public void setInYearMonth_month(int inYearMonth_month) {
+	public void setInYearMonth_month(String inYearMonth_month) {
 		this.inYearMonth_month = inYearMonth_month;
-	}	
+	}
+	public String getInDay() {
+		return inDay;
+	}
+	public void setInDay(String inDay) {
+		this.inDay = inDay;
+	}		
 }

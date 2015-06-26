@@ -31,31 +31,48 @@ public class InContoller {
 		}else if(in.getInListPrint().equals("YearMonth")){
 			in.setInListPrintCal("null");
 			in.setInYearMonth(in.getInListPrint());
+			int year = cs.inYearMonthListPrintCal(in.getInListPrint());
+			List<String> YearMonth_yearList = new ArrayList<String>();
+			for(int i=year ; i>1000 ; i--){
+				in.setInYear(i);				
+				int result = ins.inYearMonth_year(in);				
+				if(result != 0){
+					if(in.getInYearMonth_year()==0){
+						in.setInYearMonth_year(i);						
+					}
+					String yearList = i +"";
+					YearMonth_yearList.add(yearList);
+				}								
+			}			
+			model.addAttribute("year",YearMonth_yearList);
 			if(in.getInYearMonth_year()!=0){				
 				List<String> YearMonth_monthList = new ArrayList<String>();
 				YearMonth_monthList.add("달 선택");
 				for(int i=1;i<=12;i++){
-					in.setInMonth(i);
+					if(i<10){
+						in.setInMonth("0"+i);						
+					}else{
+						in.setInMonth(i+"");
+					}
+					if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){
+						in.setInDay("31");
+					}else if(i==2){
+						if(in.getInYearMonth_year()%4!=0 || in.getInYearMonth_year()%100==0 
+								&& in.getInYearMonth_year()%400!=0){
+							in.setInDay("28");							
+						}else{
+							in.setInDay("29");
+						}
+					}else{
+						in.setInDay("30");
+					}
 					int result = ins.inYearMonth_month(in);
-					if(result > 0){
-						String monthList = i +"";
-						YearMonth_monthList.add(monthList);
+					if(result > 0){						
+						YearMonth_monthList.add(in.getInMonth());
 					}
 				}
 				model.addAttribute("month",YearMonth_monthList);
-			}else{				
-				int year = cs.inYearMonthListPrintCal(in.getInListPrint());
-				List<String> YearMonth_yearList = new ArrayList<String>();
-				while(true){
-					in.setInYear(year);				
-					int result = ins.inYearMonth_year(in);				
-					if(result == 0)break;
-					String yearList = year +"";
-					YearMonth_yearList.add(yearList);
-					year --;					
-				}
-				model.addAttribute("year",YearMonth_yearList);				
-			}			
+			}						
 		}else{
 			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
 		}			

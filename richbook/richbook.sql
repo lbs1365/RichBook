@@ -40,4 +40,4 @@ insert into inmet values ('4','국민은행','1');
 
 select * from inmet;
 
-select count(inDate) from intable where memNo = 1 and inDate between '2015-01-01' and '2015-12-31' 
+select count(inDate) from intable where memNo = 1 and inDate between '2015-02-01' and '2015-02-28' 
