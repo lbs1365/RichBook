@@ -28,6 +28,8 @@ public class InContoller {
 		in.setMemNo(1);
 		if(in.getInListPrint()==null || in.getInListPrint().equals("") || in.getInListPrint().equals("All")){
 			in.setInListPrintCal("null");
+			in.setInYearMonth_year(0);
+			in.setInYearMonth_month(0);
 		}else if(in.getInListPrint().equals("YearMonth")){
 			in.setInListPrintCal("null");
 			in.setInYearMonth(in.getInListPrint());
@@ -44,10 +46,9 @@ public class InContoller {
 					YearMonth_yearList.add(yearList);
 				}								
 			}			
-			model.addAttribute("year",YearMonth_yearList);
+			model.addAttribute("year",YearMonth_yearList);			
 			if(in.getInYearMonth_year()!=0){				
-				List<String> YearMonth_monthList = new ArrayList<String>();
-				YearMonth_monthList.add("달 선택");
+				List<String> YearMonth_monthList = new ArrayList<String>();				
 				for(int i=1;i<=12;i++){
 					if(i<10){
 						in.setInMonth("0"+i);						
@@ -66,16 +67,44 @@ public class InContoller {
 					}else{
 						in.setInDay("30");
 					}
-					int result = ins.inYearMonth_month(in);
+					int result = ins.inYearMonth_month(in);					
 					if(result > 0){						
+						in.setInMonth(i+"");
 						YearMonth_monthList.add(in.getInMonth());
 					}
 				}
-				model.addAttribute("month",YearMonth_monthList);
-			}						
+				model.addAttribute("month",YearMonth_monthList);				
+			}
+			if(in.getInYearMonth_month() != 0){
+				int i = in.getInYearMonth_month();
+				if(i < 10){
+					in.setInMonth("0"+i);						
+				}else{
+					in.setInMonth(i+"");
+				}
+				if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){
+					in.setInDay("31");
+				}else if(i==2){
+					if(in.getInYearMonth_year()%4!=0 || in.getInYearMonth_year()%100==0 
+							&& in.getInYearMonth_year()%400!=0){
+						in.setInDay("28");							
+					}else{
+						in.setInDay("29");
+					}
+				}else{
+					in.setInDay("30");
+				}
+			}
 		}else{
 			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
-		}			
+		}
+		if(in.getInSearchCho().equals(null)){
+			InMet imtchk = new InMet();
+			imtchk.setMemNo(1);
+			imtchk.setImtName(in.getInSearch());
+			imtchk = imts.imtChk(imtchk);
+			in.setInSearchChoNum(imtchk.getImtNo());			
+		}
 		List<In> inlist = ins.inList(in);
 		List<InMet> imtlist = imts.imtList(in.getMemNo());
 		model.addAttribute("in",in);

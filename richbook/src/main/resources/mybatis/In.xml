@@ -15,10 +15,25 @@
 		select * from intable
 		<where>
     		<if test="inListPrintCal == 'null'"> 
-    			memNo = #{memNo}    			
+    			memNo = #{memNo} 
+    		    <if test="inListPrint == 'YearMonth'">
+    		    	<if test="inYearMonth_month == 0"> 
+	    				and inDate between #{inYearMonth_year}||'-01-01' and #{inYearMonth_year}||'-12-31'
+	    			</if>
+	    			<if test="inYearMonth_month != 0"> 
+	    				and inDate between #{inYearMonth_year}||'-'||#{inMonth}||'-01' 
+						and #{inYearMonth_year}||'-'||#{inMonth}||'-'||#{inDay}
+	    			</if>
+	    		</if>	    		
     		</if>
-    		<if test="inListPrintCal != 'null'"> 
-    			<![CDATA[ memNo = #{memNo} and inDate >= #{inListPrintCal} ]]> 
+    		<if test="inListPrintCal != 'null'">
+    			<![CDATA[ memNo = #{memNo} and inDate >= #{inListPrintCal} ]]>    		
+    		</if>
+    		<if test="inSearchCho == 'imtName'">
+    			and imtNo = #{inSearchChoNum}
+    		</if>
+    		<if test="inSearchCho == 'inCon'">
+    			and inCon = #{inSearch}
     		</if>
     	</where>
 			<if test="inSort==null || inSort=='inDate'">				

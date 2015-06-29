@@ -21,7 +21,7 @@ public class MemController {
 		return "login";
 	}
 	@RequestMapping(value="memInsert")
-	public String insertMember(Member mem, Model model) {
+	public String insertMember(Member mem, Model model) {		
 		int result = ms.insert(mem);
 		if (result > 0) return "main";
 		else {

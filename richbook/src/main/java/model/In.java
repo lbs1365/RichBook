@@ -12,14 +12,19 @@ public class In {
 	
 	private String inArr;
 	private String inSort;
-	private String inListPrint;	
+	
+	private String inListPrint;
 	private String inListPrintCal;
 	private String inYearMonth;
 	private int inYear;
 	private String inMonth;
 	private String inDay;
 	private int inYearMonth_year;
-	private String inYearMonth_month;
+	private int inYearMonth_month;
+	
+	private String inSearch;
+	private String inSearchCho;
+	private int inSearchChoNum;
 	
 	public int getInNo() {
 		return inNo;
@@ -105,22 +110,41 @@ public class In {
 	public void setInMonth(String inMonth) {
 		this.inMonth = inMonth;
 	}
+	public String getInDay() {
+		return inDay;
+	}
+	public void setInDay(String inDay) {
+		this.inDay = inDay;
+	}
 	public int getInYearMonth_year() {
 		return inYearMonth_year;
 	}
 	public void setInYearMonth_year(int inYearMonth_year) {
 		this.inYearMonth_year = inYearMonth_year;
 	}
-	public String getInYearMonth_month() {
+	public int getInYearMonth_month() {
 		return inYearMonth_month;
 	}
-	public void setInYearMonth_month(String inYearMonth_month) {
+	public void setInYearMonth_month(int inYearMonth_month) {
 		this.inYearMonth_month = inYearMonth_month;
 	}
-	public String getInDay() {
-		return inDay;
+	public String getInSearch() {
+		return inSearch;
 	}
-	public void setInDay(String inDay) {
-		this.inDay = inDay;
-	}		
+	public void setInSearch(String inSearch) {
+		this.inSearch = inSearch;
+	}
+	public String getInSearchCho() {
+		return inSearchCho;
+	}
+	public void setInSearchCho(String inSearchCho) {
+		this.inSearchCho = inSearchCho;
+	}
+	public int getInSearchChoNum() {
+		return inSearchChoNum;
+	}
+	public void setInSearchChoNum(int inSearchChoNum) {
+		this.inSearchChoNum = inSearchChoNum;
+	}
+	
 }

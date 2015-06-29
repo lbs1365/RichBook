@@ -12,40 +12,129 @@
 	$(function(){
 		$('.inDel').css('cursor', 'pointer');
 		$('.inDel').click(function() {
-			var inNo = $(this).attr('id');
+			var inNo = $(this).attr('id');			
 			location.href='InDel.do?inNo='+inNo;
 		});
 		$('.inDate').css('cursor', 'pointer');
 		$('.inDate').click(function() {
 			var inSort = $(this).attr('class');
 			var inArr = $(this).attr('id');			
-			var inListPrint = $(':radio[name="inListPrint"]:checked').val();		
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			var inYearMonth_year = $('#inYearMonth_year').val();
+			var inYearMonth_month = $('#inYearMonth_month').val();
+			var inSearchCho = $('#inSearchCho').val();
+			var inSearch = $('#inSearch').val();	
+			if(inListPrint != 'YearMonth'){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;				
+			}else if(inSearch != null){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+						+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month
+						+'&inSearch='+inSearch+'&inSearchCho='+inSearchCho;
+			}else{
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+				+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month;				
+			}
 		});
 		$('.imtNo').css('cursor', 'pointer');
 		$('.imtNo').click(function() {
 			var inSort = $(this).attr('class');
 			var inArr = $(this).attr('id');
 			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
+			var inYearMonth_year = $('#inYearMonth_year').val();
+			var inYearMonth_month = $('#inYearMonth_month').val();
+			var inSearchCho = $('#inSearchCho').val();
+			var inSearch = $('#inSearch').val();	
+			if(inListPrint != 'YearMonth'){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;				
+			}else if(inSearch != null){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+				+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month
+				+'&inSearch='+inSearch+'&inSearchCho='+inSearchCho;
+			}else{
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+						+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month;
+			}
 		});	
 		$('.inSum').css('cursor', 'pointer');
 		$('.inSum').click(function() {
 			var inSort = $(this).attr('class');
 			var inArr = $(this).attr('id');
 			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
+			var inYearMonth_year = $('#inYearMonth_year').val();
+			var inYearMonth_month = $('#inYearMonth_month').val();
+			var inSearchCho = $('#inSearchCho').val();
+			var inSearch = $('#inSearch').val();	
+			if(inListPrint != 'YearMonth'){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;				
+			}else if(inSearch != null){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+				+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month
+				+'&inSearch='+inSearch+'&inSearchCho='+inSearchCho;
+			}else{
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+						+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month;
+			}
 		});	
 		$('.inCon').css('cursor', 'pointer');
 		$('.inCon').click(function() {
 			var inSort = $(this).attr('class');
 			var inArr = $(this).attr('id');	
 			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
-			location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;
+			var inYearMonth_year = $('#inYearMonth_year').val();
+			var inYearMonth_month = $('#inYearMonth_month').val();
+			var inSearchCho = $('#inSearchCho').val();
+			var inSearch = $('#inSearch').val();	
+			if(inListPrint != 'YearMonth'){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='+inListPrint;				
+			}else if(inSearch != null){
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+				+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month
+				+'&inSearch='+inSearch+'&inSearchCho='+inSearchCho;
+			}else{
+				location.href='In.do?inArr='+inArr+'&inSort='+inSort+'&inListPrint='
+						+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month;
+			}
 		});
 		$(':radio[name="inListPrint"]').click(function() {
 			var inListPrint = $(this).val();
 			location.href='In.do?inListPrint='+inListPrint;
+		});
+		$('#inYearMonth_year').change(function() {
+			var inYearMonth_year = $(this).val();
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			location.href='In.do?inListPrint='+inListPrint+'&inYearMonth_year='+inYearMonth_year;
+		});		
+		$('#inYearMonth_month').change(function() {
+			var inYearMonth_month = $(this).val();
+			var inYearMonth_year = $('#inYearMonth_year').val();
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			location.href='In.do?inListPrint='+inListPrint+'&inYearMonth_year='+inYearMonth_year+'&inYearMonth_month='+inYearMonth_month;
+		});
+		$('#inSearch').keydown(function(e) {
+			var inSearchCho = $('#inSearchCho').val();
+			var inSearch = $('#inSearch').val();
+			var inListPrint = $(':radio[name="inListPrint"]:checked').val();
+			var inYearMonth_year = $('#inYearMonth_year').val();
+			var inYearMonth_month = $('#inYearMonth_month').val();
+			if(inListPrint != 'YearMonth'){
+				if(e.keyCode===13){
+					location.href='In.do?inSearch='+inSearch+'&inSearch='+inSearch
+							+'&inSearchCho='+inSearchCho;	
+				}
+			}else{
+				if(inYearMonth_month != null){
+					if(e.keyCode===13){
+						location.href='In.do?inSearch='+inSearch+'&inSearchCho='+inSearchCho
+							+'&inListPrint='+inListPrint+'&inYearMonth_year='+inYearMonth_year
+							+'&inYearMonth_month='+inYearMonth_month;							
+					}				
+				}else{
+					if(e.keyCode===13){
+						location.href='In.do?inSearch='+inSearch+'&inSearchCho='+inSearchCho
+						+'&inListPrint='+inListPrint+'&inYearMonth_year='+inYearMonth_year;							
+					}
+				}
+			}
 		});
 	});	
 </script>
@@ -68,22 +157,35 @@
 		<c:if test="${in.inListPrint.equals('YearMonth')}">
 		checked="checked"</c:if>>년&amp;월
 	<c:if test="${in.inListPrint.equals('YearMonth')}">	
-		<select name="inYearMonth_year">		
+		<select name="inYearMonth_year" id="inYearMonth_year">		
 			<c:forEach var="year" items="${year }">
-				<option value="${year}">${year}</option>
+				<option value="${year}" 
+				<c:if test="${in.inYearMonth_year == year}">selected="selected"</c:if>
+				>${year}</option>
 			</c:forEach>
 		</select>
-		<select name="inYearMonth_month">
+		<select name="inYearMonth_month" id="inYearMonth_month">
+			<option value="0">월 선택</option>
 			<c:forEach var="month" items="${month }">
-				<option value="${month}">${month}</option>
+				<option value="${month}"
+				<c:if test="${in.inYearMonth_month == month}">selected="selected"</c:if>
+				>${month}월</option>
 			</c:forEach>
 		</select>
-	</c:if>	
-	
+	</c:if>		
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<select id="inSearchCho">
+		<option value="imtName" 
+			<c:if test="${in.inSearchCho.equals('imtName')}"> selected="selected"</c:if>
+		>분류</option>		
+		<option value="inCon"
+			<c:if test="${in.inSearchCho.equals('inCon')}"> selected="selected"</c:if>
+		>내역</option>
+	</select>
+	<input type="search" id="inSearch" value="${in.Search}">
 	<a href="#"	onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류 설정</a>
 	<br>			
 	<form action="InInsert.do" method="post">
@@ -180,6 +282,6 @@
 				<td><input type="submit" value="추가"></td>
 			</tr>			
 		</table>		
-	</form>	
+	</form>		
 </body>
 </html>
