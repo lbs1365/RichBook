@@ -118,7 +118,7 @@
 			var inYearMonth_month = $('#inYearMonth_month').val();
 			if(inListPrint != 'YearMonth'){
 				if(e.keyCode===13){
-					location.href='In.do?inSearch='+inSearch+'&inSearch='+inSearch
+					location.href='In.do?inListPrint='+inListPrint+'&inSearch='+inSearch
 							+'&inSearchCho='+inSearchCho;	
 				}
 			}else{
@@ -140,7 +140,8 @@
 </script>
 </head>
 <body>
-	<h2>수입</h2>	
+	<h2>수입</h2>
+	<a href="#"	onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류 설정</a><br>
 	<input type="radio" name="inListPrint" value="All" 
 		<c:if test="${in.inListPrint == null || in.inListPrint.equals('All')}">
 		checked="checked"</c:if>>전체
@@ -185,9 +186,7 @@
 			<c:if test="${in.inSearchCho.equals('inCon')}"> selected="selected"</c:if>
 		>내역</option>
 	</select>
-	<input type="search" id="inSearch" value="${in.Search}">
-	<a href="#"	onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류 설정</a>
-	<br>			
+	<input type="search" id="inSearch" value="${in.inSearch}">					
 	<form action="InInsert.do" method="post">
 		<table border="1">
 			<tr>

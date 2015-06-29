@@ -98,7 +98,9 @@ public class InContoller {
 		}else{
 			in.setInListPrintCal(cs.inListPrintCal(in.getInListPrint()));
 		}
-		if(in.getInSearchCho().equals(null)){
+		if(in.getInSearchCho()==null || in.getInSearchCho().equals("")){
+			in.setInSearchCho(null);
+		}else if(in.getInSearchCho().equals("imtName")){
 			InMet imtchk = new InMet();
 			imtchk.setMemNo(1);
 			imtchk.setImtName(in.getInSearch());
