@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ExMet">
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <resultMap id="ExMetResult" type="ExMet">
+    <result property="emtNo" column="emtNo"/>
+    <result property="emtName" column="emtName"/>  
+    <result property="memNo" column="memNo" />    
+  </resultMap>
+   <select id="ExMetList" parameterType="int" resultMap="ExMetResult">
+		select * from exmet where memNo=#{memNo}
+	</select>
+	<select id="EmtChk" parameterType="ExMet" resultMap="ExMetResult">
+		select * from exmet where memNo=#{memNo} and emtName=#{emtName}
+	</select>
+	<insert id="EmtUp" parameterType="ExMet">
+		<selectKey order="BEFORE" keyProperty="emtNo" resultType="int">
+			select nvl(max(emtNo),0)+1 emtNo from exmet
+		</selectKey>
+		insert into exmet values (#{emtNo},#{emtName},#{memNo})
+	</insert>
+	<delete id="EmtDel" parameterType="int">
+		delete from exmet where emtNo=#{emtNo}
+	</delete>
+</mapper>

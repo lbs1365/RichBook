@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ex">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="ExResult" type="Ex">		
+		<result property="emtNo" column="emtNo" />
+		<result property="exDate" column="exDate" />
+		<result property="exSum" column="exSum" />
+		<result property="exCon" column="exCon" />
+		<result property="exEtc" column="exEtc" />
+		<result property="memNo" column="memNo" />
+	</resultMap>
+	<select id="ExList" parameterType="Ex" resultMap="ExResult">
+		select * from extable
+		<where>
+    		<if test="exListPrintCal == 'null'"> 
+    			memNo = #{memNo} </if>
+    		<if test="exListPrintCal != 'null'"> 
+    			<![CDATA[ memNo = #{memNo} and exDate >= #{exListPrintCal} ]]> </if>
+    	</where>
+			<if test="exSort==null || exSort=='exDate'">				
+				<if test="exArr==null || exArr=='Desc'">
+					order by exDate desc
+				</if>
+				<if test="exArr=='Asc'">
+					order by exDate
+				</if> 
+			</if>
+			<if test="exSort=='emtNo'">				
+				<if test="exArr=='Desc'">
+					order by emtNo desc
+				</if>
+				<if test="exArr=='Asc'">
+					order by emtNo
+				</if> 
+			</if>
+			<if test="exSort=='exSum'">				
+				<if test="exArr=='Desc'">
+					order by exSum desc
+				</if>
+				<if test="exArr=='Asc'">
+					order by exSum
+				</if> 
+			</if>	
+			<if test="exSort=='exCon'">				
+				<if test="exArr=='Desc'">
+					order by exCon desc
+				</if>
+				<if test="exArr=='Asc'">
+					order by exCon
+				</if> 
+			</if>						
+	</select>	
+	<insert id="ExInsert" parameterType="Ex">
+	<selectKey order="BEFORE" keyProperty="exNo" resultType="int">
+  		select nvl(max(exNo),0)+1 exNo from extable
+  	</selectKey>
+		insert into extable values (#{exNo},#{emtNo},#{exDate},#{exSum},#{exCon},#{exEtc},1)
+	</insert>
+	<delete id="ExDel" parameterType="int">
+		delete from extable where exNo=#{exNo}
+	</delete>
+	<!-- <select id="detail" parameterType="int" resultType="Member">
+		select * from emp where empno = #{empno}
+	</select>
+	<select id="login" parameterType="String" resultType="Member">
+		select * from member where id = #{id}
+	</select>
+	<update id="update" parameterType="Member">
+		update emp set ename=#{ename},job=#{job},mgr=#{mgr},
+		<if test="hiredate!=''">hiredate=#{hiredate},</if>
+		sal=#{sal},
+		<if test="comm!=null"> comm=#{comm},    </if>
+		deptno=#{deptno} where empno=#{empno}
+	</update>
+	 -->
+</mapper>

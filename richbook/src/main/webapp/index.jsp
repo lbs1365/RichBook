@@ -10,7 +10,10 @@
 <%
 // 	response.sendRedirect("memIn.do");	
  	/* response.sendRedirect("loginform.do"); */
- 	response.sendRedirect("In.do");
+ 	/* response.sendRedirect("In.do"); */
+ 	/* response.sendRedirect("Ex.do"); */
+/*  	response.sendRedirect("Chart.do"); */
+ 	response.sendRedirect("MemoList.do");
 %>
 </body>
 </html>

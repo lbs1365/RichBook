@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Memo">
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<resultMap id="MemoResult" type="Memo">
+		<result property="MemoNo" column="MemoNo" />
+		<result property="regdate" column="regdate" />
+		<result property="content" column="content" />
+		<result property="memoDate" column="memoDate" />
+	</resultMap>
+	<select id="MemoList" resultMap="MemoResult">
+		select * from Memo order by MemoNo
+	</select>
+	
+	<insert id="MemoInsert" parameterType="Memo">
+	<selectKey order="BEFORE" keyProperty="MemoNo" resultType="int">
+  		select nvl(max(MemoNo),0)+1 MemoNo from Memo
+  	</selectKey>
+		insert into Memo values (#{MemoNo},  to_char(sysdate,'YYYY-MM-DD'), #{content}, #{memoDate})
+	</insert>
+	
+	
+	<delete id="MemoDel" parameterType="int">
+		delete from Memo where memoNo=#{memoNo}
+	</delete>
+</mapper>

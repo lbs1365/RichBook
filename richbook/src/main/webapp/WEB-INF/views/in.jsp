@@ -141,7 +141,7 @@
 </head>
 <body>
 	<h2>수입</h2>
-	<a href="#"	onclick="window.open('ImtUpList.do','분류 설정','width=800,height=800')">분류 설정</a><br>
+	<a href="#"	onclick="window.open('ImtUpList.do','분류 추가','width=800,height=800')">분류 추가</a><br>
 	<input type="radio" name="inListPrint" value="All" 
 		<c:if test="${in.inListPrint == null || in.inListPrint.equals('All')}">
 		checked="checked"</c:if>>전체
@@ -247,7 +247,20 @@
 					</th>
 				</c:if>
 				<th>기타</th>				
-				<th>삭제</th>
+				<th>추가&삭제</th>
+			</tr>
+			<tr>
+				<td>입력</td>
+				<td><input type="date" name="inDate" required="required"></td>
+				<td><select name="imtNo">
+						<c:forEach var="imtlist" items="${imtlist }">
+							<option value="${imtlist.imtNo }">${imtlist.imtName }</option>
+						</c:forEach>
+				</select></td>
+				<td><input type="number" name="inSum" min="0" required="required"></td>
+				<td><input type="text" name="inCon" required="required"></td>
+				<td><input type="text" name="inEtc"></td>
+				<td align="center"><input type="submit" value="추가"></td>
 			</tr>
 			<c:set var="i" value="${inlist.size() }" />			
 			<c:forEach var="inlist" items="${inlist }">
@@ -266,20 +279,7 @@
 					<td align="center"><div class="inDel" id="${inlist.inNo}">x</div></td>
 				</tr>
 				<c:set var="i" value="${i-1 }" />				
-			</c:forEach>
-			<tr>
-				<td>입력</td>
-				<td><input type="date" name="inDate" required="required"></td>
-				<td><select name="imtNo">
-						<c:forEach var="imtlist" items="${imtlist }">
-							<option value="${imtlist.imtNo }">${imtlist.imtName }</option>
-						</c:forEach>
-				</select></td>
-				<td><input type="number" name="inSum" min="0" required="required"></td>
-				<td><input type="text" name="inCon" required="required"></td>
-				<td><input type="text" name="inEtc"></td>
-				<td><input type="submit" value="추가"></td>
-			</tr>			
+			</c:forEach>						
 		</table>		
 	</form>		
 </body>
