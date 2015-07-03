@@ -21,11 +21,11 @@ public class MailServiceImpl implements MailService{
     private JavaMailSender mailSender;
 
     @Override
-    public <T> boolean mailSe(T report) {
+    public <T> boolean mailSe(T report, String mailAddr) {
         logger.debug("Sending report by email...");
         boolean retVal = false;
         try {
-            final String emailTo = "dkts7@naver.com";         
+            final String emailTo = mailAddr;         
             final String subject = "test subject";
             final String message = (String) report;
 
@@ -37,7 +37,7 @@ public class MailServiceImpl implements MailService{
 
                     mimeMessageHelper.setTo(emailTo);                   
                     mimeMessageHelper.setSubject(subject);
-                    mimeMessageHelper.setText(message);         
+                    mimeMessageHelper.setText(message, true);         
                 };
             });
 
