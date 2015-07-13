@@ -9,7 +9,7 @@
 		<result property="inSum" column="inSum" />
 		<result property="inCon" column="inCon" />
 		<result property="inEtc" column="inEtc" />
-		<result property="memNo" column="memNo" />		
+		<result property="memNo" column="memNo"  />		
 	</resultMap>
 	<select id="InList" parameterType="In" resultMap="InResult">
 		select * from intable

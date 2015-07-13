@@ -25,4 +25,18 @@ public class ExServiceImpl implements ExService{
 		exd.exDel(exNo);
 		
 	}
+
+
+	
+	public int exYearMonth_year(Ex ex) {
+		
+		return exd.exYearMonth_year(ex);
+	}
+
+
+	
+	public int exYearMonth_month(Ex ex) {
+		
+		return exd.exYearMonth_month(ex);
+	}
 }

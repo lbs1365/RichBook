@@ -1,9 +1,6 @@
 package controller;
 
 
-import javax.servlet.http.HttpSession;
-
-import model.MailChk;
 import model.Member;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +22,17 @@ public class MemController {
 		return "memIn";
 	}
 	@RequestMapping(value="mailChk")	
-	public String mailChk(String mailChk, Model model, HttpSession session) {		
-		MailChk mc = (MailChk) session.getAttribute("emailChk");
-		System.out.println(mc.getId()+"");
-		if(mailChk.equals(mc.getMailChk())) {
+	public String mailChk(String mailChk, Model model) {
+		Member mem = ms.login(mailChk);
+		if(mem ==null || mem.equals("")){
 			model.addAttribute("idChk","인증완료");
-			model.addAttribute("id",mc.getId());
+			model.addAttribute("id",mailChk);			
+			return "forward:memIn.do";
 		}else{
-			model.addAttribute("idChk","인증되지 않았습니다");
+			model.addAttribute("msg","잘못된 접근입니다");
+			model.addAttribute("idChk","null");	
+			return "memIn";
 		}
-		return "forward:memIn.do";
 	}
 	@RequestMapping(value="loginform")	
 	public String memloginform(Model model) {

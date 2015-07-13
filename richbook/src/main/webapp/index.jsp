@@ -8,10 +8,10 @@
 </head>
 <body>
 	<%
-		response.sendRedirect("memIn.do?mailChk=noChk");
+		/* response.sendRedirect("memIn.do?mailChk=noChk"); */
 		/* response.sendRedirect("loginform.do"); */
 		/* response.sendRedirect("In.do"); */
-		/* response.sendRedirect("Ex.do"); */
+		response.sendRedirect("Ex.do");
 		/* response.sendRedirect("Chart.do"); */
 		/* response.sendRedirect("MemoList.do"); */ 
 		/* response.sendRedirect("send.do"); */

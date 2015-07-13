@@ -1,10 +1,5 @@
 package controller;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-
 import javax.annotation.Resource;
 
 import model.MailChk;
@@ -23,26 +18,14 @@ public class MailController {
 	@RequestMapping(value = "IdEmailChk")
 	public String sendMail(MailChk mc, Model model) throws Exception {		
 		try {
-			int mailChk = (int)(Math.random()*100000);			
-			if(mailChk!=0){
-				String mailCon = "<a href='http://211.183.2.70:8181/richbook/mailChk.do?mailChk="
-					+mailChk+"'>이메일 본인 확인</a>";
-				String mailAddr = mc.getId();
-				
-				FileOutputStream fos = new FileOutputStream(mailAddr);
-				
-				fos.write(mailAddr.length());
-				
-				fos.flush();
-				fos.close();
-				emailPublisherService.mailSe(mailCon,mailAddr);
-		    	int addrcnt = mc.getId().indexOf("@");
-		    	String addr = mc.getId().substring(addrcnt,mc.getId().length());
-		    	model.addAttribute("addr", addr);
-		    }else{
-		    	return "redirect:memIn.do?mailChk=noChk";
-		    }
-			return "success";
+			String mailAddr = mc.getId();				
+			String mailCon = "<a href='http://211.183.2.70:8181/richbook/mailChk.do?mailChk="
+				+mailAddr+"'>이메일 본인 확인</a>";
+			emailPublisherService.mailSe(mailCon,mailAddr);
+		    int addrcnt = mc.getId().indexOf("@");
+		    String addr = mc.getId().substring(addrcnt,mc.getId().length());
+		    model.addAttribute("addr", addr);
+		    return "success";		
 		} catch (Exception e) {
 			throw e;
 		}
