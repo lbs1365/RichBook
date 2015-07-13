@@ -28,12 +28,12 @@ public class ExDaoImpl implements ExDao {
 
 	public int exYearMonth_year(Ex ex) {
 
-		return session.selectOne("exYearMonth_year", ex);
+		return session.selectOne("ExYearMonth_year", ex);
 	}
 
 	public int exYearMonth_month(Ex ex) {
 
-		return session.selectOne("exYearMonth_month", ex);
+		return session.selectOne("ExYearMonth_month", ex);
 	}
 
 }

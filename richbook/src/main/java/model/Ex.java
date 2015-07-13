@@ -18,6 +18,15 @@ public class Ex {
 	private String exYearMonth;
 	private int exYear;
 	private String exMonth;
+	
+	private String exDay;
+	private int exYearMonth_year;
+	private int exYearMonth_month;
+	
+	private String exSearch;
+	private String exSearchCho;
+	private int exSearchChoNum;
+		
 	public String getExYearMonth() {
 		return exYearMonth;
 	}
@@ -71,17 +80,7 @@ public class Ex {
 	}
 	public void setExSearchChoNum(int exSearchChoNum) {
 		this.exSearchChoNum = exSearchChoNum;
-	}
-	private String exDay;
-	private int exYearMonth_year;
-	private int exYearMonth_month;
-	
-	private String exSearch;
-	private String exSearchCho;
-	private int exSearchChoNum;
-	
-	
-	
+	}	
 	public String getExArr() {
 		return exArr;
 	}

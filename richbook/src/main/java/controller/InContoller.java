@@ -35,7 +35,7 @@ public class InContoller {
 			in.setInYearMonth(in.getInListPrint());
 			int year = cs.inYearMonthListPrintCal(in.getInListPrint());
 			List<String> YearMonth_yearList = new ArrayList<String>();
-			for(int i=year ; i>1000 ; i--){
+			for(int i=year ; i>1900 ; i--){
 				in.setInYear(i);				
 				int result = ins.inYearMonth_year(in);				
 				if(result != 0){
@@ -105,7 +105,11 @@ public class InContoller {
 			imtchk.setMemNo(1);
 			imtchk.setImtName(in.getInSearch());
 			imtchk = imts.imtChk(imtchk);
-			in.setInSearchChoNum(imtchk.getImtNo());			
+			if(imtchk == null){
+				in.setInSearchChoNum(0);
+			}else{
+				in.setInSearchChoNum(imtchk.getImtNo());	
+			}
 		}
 		List<In> inlist = ins.inList(in);
 		List<InMet> imtlist = imts.imtList(in.getMemNo());

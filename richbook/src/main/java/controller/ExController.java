@@ -34,11 +34,11 @@ public class ExController {
 		}else if(ex.getExListPrint().equals("YearMonth")){
 			ex.setExListPrintCal("null");
 			ex.setExYearMonth(ex.getExListPrint());
-			int year = cs.exYearMonthListPrintCal(ex.getExListPrint());
+			int year = cs.exYearMonthListPrintCal(ex.getExListPrint());			
 			List<String> YearMonth_yearList = new ArrayList<String>();
-			for(int i=year ; i>1000 ; i--){
+			for(int i=year ; i>1900 ; i--){
 				ex.setExYear(i);				
-				int result = exs.exYearMonth_year(ex);				
+				int result = exs.exYearMonth_year(ex);
 				if(result != 0){
 					if(ex.getExYearMonth_year()==0){
 						ex.setExYearMonth_year(i);						
@@ -74,6 +74,7 @@ public class ExController {
 						YearMonth_monthList.add(ex.getExMonth());
 					}
 				}
+				model.addAttribute("month",YearMonth_monthList);
 			}
 			if(ex.getExYearMonth_month() != 0){
 				int i = ex.getExYearMonth_month();
@@ -105,7 +106,11 @@ public class ExController {
 			emtchk.setMemNo(1);
 			emtchk.setEmtName(ex.getExSearch());
 			emtchk = emts.emtChk(emtchk);
-			ex.setExSearchChoNum(emtchk.getEmtNo());			
+			if(emtchk == null){
+				ex.setExSearchChoNum(0);
+			}else{
+				ex.setExSearchChoNum(emtchk.getEmtNo());	
+			}						
 		}
 		List<Ex> exlist = exs.exList(ex);
 		List<ExMet> emtlist = emts.emtList(ex.getMemNo());
