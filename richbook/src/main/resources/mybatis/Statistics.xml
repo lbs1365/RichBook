@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Statistics">	
+<mapper namespace="Statistics">
 	<resultMap id="StatisticsResult" type="Statistics">		
-		<result property="imtNo" column="imtNo" />
-		<result property="inDate" column="inDate" />
-		<result property="inSum" column="inSum" />
-		<result property="inCon" column="inCon" />
-		<result property="inEtc" column="inEtc" />
-		<result property="memNo" column="memNo"  />		
-	</resultMap>	
-	<select id="StatisticsYear" parameterType="Statistics" resultType="int">		
+		<result property="memNo" column="memNo" />
+		<result property="statisticsYear" column="statisticsYear" />
+		<result property="statisticsInYearSum" column="statisticsInYearSum" />
+		<result property="statisticsExYearSum" column="statisticsExYearSum" />			
+	</resultMap>
+			
+	<select id="InStatisticsYear" parameterType="Statistics" resultType="int">		
 		select count(inDate) from intable where memNo = #{memNo} 
-			and inDate between #{inYear}||'-01-01' and #{inYear}||'-12-31'
+			and inDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
+	</select>
+	<select id="ExStatisticsYear" parameterType="Statistics" resultType="int">		
+		select count(exDate) from extable where memNo = #{memNo} 
+			and exDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
+	</select>
+	<select id="StatisticsInYearSum" parameterType="Statistics" resultType="long">		
+		select sum(inSum) from intable where memNo = #{memNo} 
+			and inDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
+	</select>
+	<select id="StatisticsExYearSum" parameterType="Statistics" resultType="long">		
+		select  sum(exSum) from extable where memNo = #{memNo} 
+			and exDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
 	</select>
 </mapper>

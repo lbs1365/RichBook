@@ -281,6 +281,6 @@
 				<c:set var="i" value="${i-1 }" />				
 			</c:forEach>						
 		</table>		
-	</form>		
+	</form>
 </body>
 </html>

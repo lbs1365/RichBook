@@ -124,3 +124,9 @@ insert into exmet values ('4','국민은행','1');
 
 select * from exmet;
 
+
+---------------------------------------------------------------
+
+select sum(inSum) from intable where memNo = 1
+			and inDate between '2015-01-01' and '2015-12-31';
+
