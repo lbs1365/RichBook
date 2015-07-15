@@ -129,9 +129,19 @@ select * from exmet;
 
 select sum(inSum) from intable where memNo = 1
 			and inDate between '2015-01-01' and '2015-12-31';
-			
-select to_char(inDate,'MM') from intable where memNo = 1
+
+select distinct to_char(inDate,'MM') from intable where memNo = 1
 	and inDate between '2015-01-01' and '2015-12-31';
+			
+select distinct to_char(exDate,'MM') from extable where memNo = 1
+	and exDate between '2015-01-01' and '2015-12-31';
+
+select nvl(sum(inSum),0) from intable where memNo = 1			
+	and inDate between '2015-07-01' 
+		and '2015-07-31';	
 	
 select distinct to_char(inDate,'YYYY') as "statisticsYear" from intable where memNo = 1 order by to_char(inDate,'YYYY');
 select distinct to_char(inDate,'MM') as "statisticsMonth" from intable where memNo = 1 order by to_char(inDate,'MM') desc;
+select distinct to_char(inDate,'DD') as "statisticsDay" from intable where memNo = 1 and inDate between '2015-06-01' and '2015-06-30' order by to_char(inDate,'DD') desc;
+
+

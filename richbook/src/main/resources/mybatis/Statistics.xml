@@ -6,7 +6,10 @@
 		<result property="memNo" column="memNo" />
 		<result property="statisticsYear" column="statisticsYear" />
 		<result property="statisticsInYearSum" column="statisticsInYearSum" />
-		<result property="statisticsExYearSum" column="statisticsExYearSum" />			
+		<result property="statisticsExYearSum" column="statisticsExYearSum" />
+		<result property="statisticsMonth" column="statisticsMonth" />
+		<result property="statisticsMonthList" column="statisticsMonthList" />
+		<result property="statisticsDay" column="statisticsDay" />
 	</resultMap>
 			
 	<select id="InStatisticsYear" parameterType="Statistics" resultMap="StatisticsResult" >		
@@ -17,57 +20,45 @@
 		select distinct to_char(exDate,'YYYY') as "statisticsYear" from extable where memNo = #{memNo}
 			order by to_char(exDate,'YYYY') desc
 	</select>
-	<!-- 
-	<select id="StatisticsInYearSum" parameterType="Statistics" resultType="long">		
-		select sum(inSum) from intable where memNo = #{memNo} 
+	
+	
+	<select id="InStatisticsYearSum" parameterType="Statistics" resultType="long">		
+		select nvl(sum(inSum),0) from intable where memNo = #{memNo} 
 			and inDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
 	</select>
-	<select id="StatisticsExYearSum" parameterType="Statistics" resultType="long">		
-		select  sum(exSum) from extable where memNo = #{memNo} 
+	<select id="ExStatisticsYearSum" parameterType="Statistics" resultType="long">		
+		select  nvl(sum(exSum),0) from extable where memNo = #{memNo} 
 			and exDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
 	</select>
 	
-	<select id="InStatisticsMonth" parameterType="Statistics" resultType="int">		
-		select count(inDate) from intable where memNo = #{memNo} 
-			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	<select id="InStatisticsMonth" parameterType="Statistics" resultMap="StatisticsResult" >		
+		select distinct to_char(inDate,'MM') as "statisticsMonthList" from intable where memNo = #{memNo}
+			and inDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31' order by to_char(inDate,'MM') desc
 	</select>
-	<select id="ExStatisticsMonth" parameterType="Statistics" resultType="int">		
-		select count(exDate) from extable where memNo = #{memNo} 
-			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	<select id="ExStatisticsMonth" parameterType="Statistics" resultMap="StatisticsResult">		
+		select distinct to_char(exDate,'MM') as "statisticsMonthList" from extable where memNo = #{memNo}
+			and exDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31' order by to_char(exDate,'MM') desc 
 	</select>
 	
 	<select id="InStatisticsMonthSum" parameterType="Statistics" resultType="long">		
-		select sum(inSum) from intable where memNo = #{memNo} 
-			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+		select nvl(sum(inSum),0) from intable where memNo = #{memNo}			
+				and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
+					and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}			
 	</select>
 	<select id="ExStatisticsMonthSum" parameterType="Statistics" resultType="long">		
-		select sum(exSum) from extable where memNo = #{memNo} 
+		select  nvl(sum(exSum),0) from extable where memNo = #{memNo}		
 			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}			
 	</select>
 	
-	<select id="InStatisticsMonth" parameterType="Statistics" resultType="int">		
-		select count(inDate) from intable where memNo = #{memNo} 
-			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	<select id="InStatisticsDay" parameterType="Statistics" resultMap="StatisticsResult">		
+		select distinct to_char(inDate,'DD') as "statisticsDay" from intable where memNo = #{memNo}
+			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay} 
+				order by to_char(inDate,'DD') desc	
 	</select>
-	<select id="ExStatisticsMonth" parameterType="Statistics" resultType="int">		
-		select count(exDate) from extable where memNo = #{memNo} 
-			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	<select id="ExStatisticsDay" parameterType="Statistics" resultMap="StatisticsResult">		
+		select distinct to_char(exDate,'DD') as "statisticsDay" from extable where memNo = #{memNo}
+			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay} 
+				order by to_char(exDate,'DD') desc		
 	</select>
-	
-	<select id="InStatisticsMonthSum" parameterType="Statistics" resultType="long">		
-		select sum(inSum) from intable where memNo = #{memNo} 
-			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
-	</select>
-	<select id="ExStatisticsMonthSum" parameterType="Statistics" resultType="long">		
-		select sum(exSum) from extable where memNo = #{memNo} 
-			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
-				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
-	</select>	 -->
 </mapper>

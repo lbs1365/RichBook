@@ -7,6 +7,7 @@ public class Statistics {
 	
 	private int statisticsYear;
 	private String statisticsMonth;
+	private int statisticsMonthList;
 	private int statisticsDay;
 	
 	private long statisticsInYearSum;
@@ -37,6 +38,14 @@ public class Statistics {
 
 	public void setStatisticsMonth(String statisticsMonth) {
 		this.statisticsMonth = statisticsMonth;
+	}
+	
+	public int getStatisticsMonthList() {
+		return statisticsMonthList;
+	}
+
+	public void setStatisticsMonthList(int statisticsMonthList) {
+		this.statisticsMonthList = statisticsMonthList;
 	}
 
 	public int getStatisticsDay() {
@@ -77,5 +86,7 @@ public class Statistics {
 
 	public void setStatisticsMonthPrint(List<StatisticsMonth> statisticsMonthPrint) {
 		this.statisticsMonthPrint = statisticsMonthPrint;
-	}	
+	}
+
+	
 }

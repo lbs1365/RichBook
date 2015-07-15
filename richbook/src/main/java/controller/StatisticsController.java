@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Statistics;
+import model.StatisticsDay;
 import model.StatisticsMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,54 @@ public class StatisticsController {
 		long InMonthSum = 0;
 		long ExMonthSum = 0;
 		long TotalMonthSum = 0;
+		int CalstatisticsDay = 0;
 		List<Integer> YearList = new ArrayList<Integer>();
-		List<StatisticsMonth> MonthList = new ArrayList<StatisticsMonth>();		
+		List<Integer> MonthList = new ArrayList<Integer>();
+		List<Integer> DayList = new ArrayList<Integer>();
+		List<StatisticsMonth> statsMonthList = new ArrayList<StatisticsMonth>();
+		List<StatisticsDay> statsDayList = new ArrayList<StatisticsDay>();
 		
 		int year = cs.inYearMonthListPrintCal("현재 년도");
 		
 		Statistics stat = new Statistics();
-		
+		StatisticsMonth statMonth = new StatisticsMonth();
+		StatisticsDay statDay = new StatisticsDay();
 		stat.setMemNo(1);
 		YearList = stats.StatisticsYearList(stat);
+		for(int i=0 ; i<YearList.size(); i++){
+			stat.setStatisticsYear(YearList.get(i));
+			InYearSum = stats.StatisticsInYearSum(stat);
+			ExYearSum = stats.StatisticsExYearSum(stat);
+			TotalYearSum = InYearSum - ExYearSum;
+			stat.setStatisticsInYearSum(InYearSum);
+			stat.setStatisticsExYearSum(ExYearSum);
+			stat.setStatisticsTotalYearSum(TotalYearSum);
+			MonthList = stats.StatisticsMonthList(stat);			
+			for(int j=0 ; j<MonthList.size(); j++){
+				if(MonthList.get(j)<10){
+					stat.setStatisticsMonth("0"+MonthList.get(j));						
+				}else{
+					stat.setStatisticsMonth(MonthList.get(j)+"");
+				}				
+				CalstatisticsDay = cs.statisticsDay(MonthList.get(j), YearList.get(i));
+				stat.setStatisticsDay(CalstatisticsDay);
+				InMonthSum = stats.StatisticsInMonthSum(stat);
+				ExMonthSum = stats.StatisticsExMonthSum(stat);				
+				TotalMonthSum = InMonthSum - ExMonthSum;
+				statMonth.setStatisticsInMonthSum(InMonthSum);
+				statMonth.setStatisticsExMonthSum(ExMonthSum);
+				statMonth.setStatisticsTotalMonthSum(TotalMonthSum);
+				statMonth.setStatisticsMonthList(MonthList.get(j));								
+				statsMonthList.add(statMonth);
+				DayList = stats.StatisticsDayList(stat);				
+				for(int z=0 ; z<MonthList.size(); z++){
+					statDay.setStatisticsDayList(DayList.get(z));
+					statsDayList.add(statDay);
+				}
+				statMonth.setStatisticsDayPrint(statsDayList);
+			}
+			stat.setStatisticsMonthPrint(statsMonthList);			
+		}
 		
 		
 		/*for(int i=year ; i>1900 ; i--){

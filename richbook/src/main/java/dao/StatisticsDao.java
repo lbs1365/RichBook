@@ -12,9 +12,13 @@ public interface StatisticsDao {
 	long StatisticsInYearSum(Statistics stat);
 	long StatisticsExYearSum(Statistics stat);
 	
-	int InStatisticsMonth(Statistics stat);
-	int ExStatisticsMonth(Statistics stat);
+	List<Statistics> InStatisticsMonthList(Statistics stat);
+	List<Statistics> ExStatisticsMonhtList(Statistics stat);
 	
 	long StatisticsInMonthSum(Statistics stat);
 	long StatisticsExMonthSum(Statistics stat);
+	
+	List<Statistics> InStatisticsDayList(Statistics stat);
+	List<Statistics> ExStatisticsDayList(Statistics stat);
+	
 }

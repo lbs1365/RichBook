@@ -9,10 +9,11 @@ public interface StatisticsService {
 	
 	long StatisticsInYearSum(Statistics stat);
 	long StatisticsExYearSum(Statistics stat);
-	
-	int InStatisticsMonth(Statistics stat);
-	int ExStatisticsMonth(Statistics stat);
+
+	List<Integer> StatisticsMonthList(Statistics stat);
 	
 	long StatisticsInMonthSum(Statistics stat);
-	long StatisticsExMonthSum(Statistics stat);
+	long StatisticsExMonthSum(Statistics stat);	
+	
+	List<Integer> StatisticsDayList(Statistics stat);
 }

@@ -17,18 +17,18 @@ public class StatisticsDaoImpl implements StatisticsDao{
 	}
 	public List<Statistics> ExStatisticsYearList(Statistics stat){		
 		return session.selectList("ExStatisticsYear",stat);
-	}
+	}	
 	public long StatisticsInYearSum(Statistics stat) {		
-		return session.selectOne("StatisticsInYearSum",stat);
+		return session.selectOne("InStatisticsYearSum",stat);
 	}
 	public long StatisticsExYearSum(Statistics stat) {
-		return session.selectOne("StatisticsExYearSum",stat);
+		return session.selectOne("ExStatisticsYearSum",stat);
 	}
-	public int InStatisticsMonth(Statistics stat) {
-		return session.selectOne("InStatisticsMonth",stat);
+	public List<Statistics> InStatisticsMonthList(Statistics stat) {		
+		return session.selectList("InStatisticsMonth",stat);
 	}
-	public int ExStatisticsMonth(Statistics stat) {
-		return session.selectOne("ExStatisticsMonth",stat);
+	public List<Statistics> ExStatisticsMonhtList(Statistics stat) {	
+		return session.selectList("ExStatisticsMonth",stat);
 	}
 	public long StatisticsInMonthSum(Statistics stat) {
 		return session.selectOne("InStatisticsMonthSum",stat);
@@ -36,5 +36,11 @@ public class StatisticsDaoImpl implements StatisticsDao{
 	public long StatisticsExMonthSum(Statistics stat) {
 		return session.selectOne("ExStatisticsMonthSum",stat);
 	}
-
+	public List<Statistics> InStatisticsDayList(Statistics stat) {		
+		return session.selectList("InStatisticsDay",stat);
+	}
+	public List<Statistics> ExStatisticsDayList(Statistics stat) {		
+		return session.selectList("ExStatisticsDay",stat);
+	}
+	
 }

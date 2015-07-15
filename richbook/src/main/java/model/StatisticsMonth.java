@@ -1,16 +1,19 @@
 package model;
 
+import java.util.List;
+
 public class StatisticsMonth {
 	
-	private String statisticsMonthList;
+	private int statisticsMonthList;
 	private long statisticsInMonthSum;
 	private long statisticsExMonthSum;
 	private long statisticsTotalMonthSum;
+	private List<StatisticsDay> statisticsDayPrint;
 	
-	public String getStatisticsMonthList() {
+	public int getStatisticsMonthList() {
 		return statisticsMonthList;
 	}
-	public void setStatisticsMonthList(String statisticsMonthList) {
+	public void setStatisticsMonthList(int statisticsMonthList) {
 		this.statisticsMonthList = statisticsMonthList;
 	}
 	public long getStatisticsInMonthSum() {
@@ -31,5 +34,10 @@ public class StatisticsMonth {
 	public void setStatisticsTotalMonthSum(long statisticsTotalMonthSum) {
 		this.statisticsTotalMonthSum = statisticsTotalMonthSum;
 	}
-
+	public List<StatisticsDay> getStatisticsDayPrint() {
+		return statisticsDayPrint;
+	}
+	public void setStatisticsDayPrint(List<StatisticsDay> statisticsDayPrint) {
+		this.statisticsDayPrint = statisticsDayPrint;
+	}
 }
