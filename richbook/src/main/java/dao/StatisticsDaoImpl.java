@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import model.Statistics;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,18 +12,11 @@ import org.springframework.stereotype.Repository;
 public class StatisticsDaoImpl implements StatisticsDao{
 	@Autowired
 	private SqlSession session;
-	public int StatisticsList(Statistics stat) {
-		int StatisticsYear = 0;
-		int InStatisticsYear = session.selectOne("InStatisticsYear",stat);
-		int ExStatisticsYear = session.selectOne("ExStatisticsYear",stat);
-		if(InStatisticsYear != 0 && ExStatisticsYear != 0){
-			StatisticsYear = 3;
-		}else if(ExStatisticsYear != 0 ){
-			StatisticsYear = 2;
-		}else if(InStatisticsYear != 0 ){
-			StatisticsYear = 1;
-		}
-		return StatisticsYear;
+	public List<Statistics> InStatisticsYearList(Statistics stat){			
+		return session.selectList("InStatisticsYear",stat);
+	}
+	public List<Statistics> ExStatisticsYearList(Statistics stat){		
+		return session.selectList("ExStatisticsYear",stat);
 	}
 	public long StatisticsInYearSum(Statistics stat) {		
 		return session.selectOne("StatisticsInYearSum",stat);

@@ -13,6 +13,7 @@ public class CalServiceImpl implements CalService{
 	int lastcalDay;
 	int inListPrintCal;
 	int exListPrintCal;
+	int statisticsDay = 0;
 	public String inListPrintCal(String inListPrint){
 		Calendar cal = Calendar.getInstance();
 		day = cal.get(Calendar.DATE);
@@ -244,5 +245,21 @@ public class CalServiceImpl implements CalService{
 		exListPrintCal = year;
 		return exListPrintCal;
 	}
-	
+	public int statisticsDay(int statisticsMonth, int statisticsYear) {	
+		
+		if(statisticsMonth==1 || statisticsMonth==3 || statisticsMonth==5 || 
+				statisticsMonth==7 || statisticsMonth==8 || statisticsMonth==10 || statisticsMonth==12){
+			statisticsDay = 31;
+		}else if(statisticsMonth==2){
+			if(statisticsYear%4!=0 || statisticsYear%100==0 
+					&& statisticsYear%400!=0){
+				statisticsDay = 28 ;							
+			}else{
+				statisticsDay = 29;
+			}
+		}else{
+			statisticsDay = 30;
+		}
+		return statisticsDay;
+	}	
 }

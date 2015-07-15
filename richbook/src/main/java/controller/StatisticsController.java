@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Statistics;
+import model.StatisticsMonth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,13 +28,18 @@ public class StatisticsController {
 		long InMonthSum = 0;
 		long ExMonthSum = 0;
 		long TotalMonthSum = 0;
-		List<Statistics> YearList = new ArrayList<Statistics>();
-		List<String> MonthList = new ArrayList<String>();
-		List<Long> MonthSumList = new ArrayList<Long>();
+		List<Integer> YearList = new ArrayList<Integer>();
+		List<StatisticsMonth> MonthList = new ArrayList<StatisticsMonth>();		
 		
 		int year = cs.inYearMonthListPrintCal("현재 년도");
-
-		for(int i=year ; i>1900 ; i--){
+		
+		Statistics stat = new Statistics();
+		
+		stat.setMemNo(1);
+		YearList = stats.StatisticsYearList(stat);
+		
+		
+		/*for(int i=year ; i>1900 ; i--){
 			Statistics stat = new Statistics();
 			stat.setMemNo(1);
 			stat.setStatisticsYear(i);		
@@ -41,95 +47,84 @@ public class StatisticsController {
 			if(YearResult != 0){
 				if(YearResult == 1){
 					InYearSum = stats.StatisticsInYearSum(stat);
-					for(int j=1;i<=12;i++){						
+					for(int j=1;i<=12;i++){
+						StatisticsMonth statmonth = new StatisticsMonth();
 						if(j<10){
 							stat.setStatisticsMonth("0"+j);						
 						}else{
 							stat.setStatisticsMonth(j+"");
 						}
-						if(j==1 || j==3 || j==5 || j==7 || j==8 || j==10 || j==12){
-							stat.setStatisticsDay(31);
-						}else if(j==2){
-							if(i%4!=0 || i%100==0 
-									&& i%400!=0){
-								stat.setStatisticsDay(28);							
-							}else{
-								stat.setStatisticsDay(29);
-							}
-						}else{
-							stat.setStatisticsDay(30);
-						}
+						int statisticsDay = cs.statisticsDay(j, i);
+						stat.setStatisticsDay(statisticsDay);						
 						int MonthResult = stats.InStatisticsMonth(stat);					
 						if(MonthResult > 0){						
-							MonthList.add(j+"");
+							statmonth.setStatisticsMonthList(j+"");
 							InMonthSum = stats.StatisticsInMonthSum(stat);
-							MonthSumList.add(InMonthSum);
+							TotalMonthSum = InMonthSum - ExMonthSum;
+							statmonth.setStatisticsInMonthSum(InMonthSum);
+							statmonth.setStatisticsTotalMonthSum(TotalMonthSum);
+							MonthList.add(statmonth);
+							
 						}
 					}										
 				}else if(YearResult == 2){
 					ExYearSum = stats.StatisticsExYearSum(stat);
-					for(int j=1;i<=12;i++){						
+					for(int j=1;i<=12;i++){
+						StatisticsMonth statmonth = new StatisticsMonth();
 						if(j<10){
 							stat.setStatisticsMonth("0"+j);						
 						}else{
 							stat.setStatisticsMonth(j+"");
 						}
-						if(j==1 || j==3 || j==5 || j==7 || j==8 || j==10 || j==12){
-							stat.setStatisticsDay(31);
-						}else if(j==2){
-							if(i%4!=0 || i%100==0 
-									&& i%400!=0){
-								stat.setStatisticsDay(28);							
-							}else{
-								stat.setStatisticsDay(29);
-							}
-						}else{
-							stat.setStatisticsDay(30);
-						}
+						int statisticsDay = cs.statisticsDay(j, i);
+						stat.setStatisticsDay(statisticsDay);		
 						int MonthResult = stats.ExStatisticsMonth(stat);					
 						if(MonthResult > 0){						
-							MonthList.add(j+"");
+							statmonth.setStatisticsMonthList(j+"");
 							ExMonthSum = stats.StatisticsExMonthSum(stat);
-							MonthSumList.add(ExMonthSum);
+							TotalMonthSum = InMonthSum - ExMonthSum;
+							statmonth.setStatisticsExMonthSum(ExMonthSum);
+							statmonth.setStatisticsTotalMonthSum(TotalMonthSum);
+							MonthList.add(statmonth);
 						}
 					}
 				}else if(YearResult == 3){
 					InYearSum = stats.StatisticsInYearSum(stat);
 					ExYearSum = stats.StatisticsExYearSum(stat);
-					for(int j=1;j<=12;j++){						
+					for(int j=1;j<=12;j++){
+						StatisticsMonth statmonth = new StatisticsMonth();
 						if(j<10){
 							stat.setStatisticsMonth("0"+j);						
 						}else{
 							stat.setStatisticsMonth(j+"");
 						}
-						if(j==1 || j==3 || j==5 || j==7 || j==8 || j==10 || j==12){
-							stat.setStatisticsDay(31);
-						}else if(j==2){
-							if(i%4!=0 || i%100==0 
-									&& i%400!=0){
-								stat.setStatisticsDay(28);							
-							}else{
-								stat.setStatisticsDay(29);
-							}
-						}else{
-							stat.setStatisticsDay(30);
-						}
+						int statisticsDay = cs.statisticsDay(j, i);
+						stat.setStatisticsDay(statisticsDay);		
 						int MonthResultIn = stats.InStatisticsMonth(stat);
 						int MonthResultEx = stats.ExStatisticsMonth(stat);						
 						if(MonthResultIn > 0 && MonthResultEx > 0){						
-							MonthList.add(j+"");
+							statmonth.setStatisticsMonthList(j+"");
 							InMonthSum = stats.StatisticsInMonthSum(stat);
 							ExMonthSum = stats.StatisticsExMonthSum(stat);
-							MonthSumList.add(InMonthSum);
-							MonthSumList.add(ExMonthSum);
+							TotalMonthSum = InMonthSum - ExMonthSum;
+							statmonth.setStatisticsInMonthSum(InMonthSum);
+							statmonth.setStatisticsExMonthSum(ExMonthSum);
+							statmonth.setStatisticsTotalMonthSum(TotalMonthSum);
+							MonthList.add(statmonth);
 						}else if(MonthResultIn > 0){
-							MonthList.add(j+"");
+							statmonth.setStatisticsMonthList(j+"");
 							InMonthSum = stats.StatisticsInMonthSum(stat);
-							MonthSumList.add(InMonthSum);
+							TotalMonthSum = InMonthSum - ExMonthSum;
+							statmonth.setStatisticsInMonthSum(InMonthSum);
+							statmonth.setStatisticsTotalMonthSum(TotalMonthSum);
+							MonthList.add(statmonth);
 						}else if(MonthResultEx > 0){
-							MonthList.add(j+"");
+							statmonth.setStatisticsMonthList(j+"");
 							ExMonthSum = stats.StatisticsExMonthSum(stat);
-							MonthSumList.add(ExMonthSum);
+							TotalMonthSum = InMonthSum - ExMonthSum;
+							statmonth.setStatisticsExMonthSum(ExMonthSum);
+							statmonth.setStatisticsTotalMonthSum(TotalMonthSum);
+							MonthList.add(statmonth);
 						}						
 					}
 				}				
@@ -137,12 +132,11 @@ public class StatisticsController {
 				stat.setStatisticsInYearSum(InYearSum);
 				stat.setStatisticsExYearSum(ExYearSum);
 				stat.setStatisticsTotalYearSum(TotalYearSum);
-				stat.setStatisticsMonthPrint(MonthList);
-				stat.setStatisticsMonthSum(MonthSumList);
+				stat.setStatisticsMonthPrint(MonthList);			
 				YearList.add(stat);
 			}
-		}		
-		model.addAttribute("statisticsYearList",YearList);	
+		}		*/
+		model.addAttribute("YearList",YearList);	
 		return "statistics";
 	}
 }

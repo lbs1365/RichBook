@@ -13,9 +13,8 @@ public class Statistics {
 	private long statisticsExYearSum;
 	private long statisticsTotalYearSum;
 	
-	private List<String> statisticsMonthPrint;
-	private List<Long> statisticsMonthSum;
-		
+	private List<StatisticsMonth> statisticsMonthPrint;
+
 	public int getMemNo() {
 		return memNo;
 	}
@@ -72,21 +71,11 @@ public class Statistics {
 		this.statisticsTotalYearSum = statisticsTotalYearSum;
 	}
 
-	public List<String> getStatisticsMonthPrint() {
+	public List<StatisticsMonth> getStatisticsMonthPrint() {
 		return statisticsMonthPrint;
 	}
 
-	public void setStatisticsMonthPrint(List<String> statisticsMonthPrint) {
+	public void setStatisticsMonthPrint(List<StatisticsMonth> statisticsMonthPrint) {
 		this.statisticsMonthPrint = statisticsMonthPrint;
-	}
-
-	public List<Long> getStatisticsMonthSum() {
-		return statisticsMonthSum;
-	}
-
-	public void setStatisticsMonthSum(List<Long> statisticsMonthSum) {
-		this.statisticsMonthSum = statisticsMonthSum;
-	}
-	
-	
+	}	
 }

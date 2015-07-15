@@ -1,9 +1,11 @@
 package service;
 
+import java.util.List;
+
 import model.Statistics;
 
 public interface StatisticsService {
-	int StatisticsList(Statistics stat);
+	List<Integer> StatisticsYearList(Statistics stat);
 	
 	long StatisticsInYearSum(Statistics stat);
 	long StatisticsExYearSum(Statistics stat);

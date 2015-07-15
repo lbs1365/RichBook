@@ -1,10 +1,13 @@
 package dao;
 
+import java.util.List;
+
 import model.Statistics;
 
 
 public interface StatisticsDao {
-	int StatisticsList(Statistics stat);
+	List<Statistics> InStatisticsYearList(Statistics stat);
+	List<Statistics> ExStatisticsYearList(Statistics stat);
 	
 	long StatisticsInYearSum(Statistics stat);
 	long StatisticsExYearSum(Statistics stat);

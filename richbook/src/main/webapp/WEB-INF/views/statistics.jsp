@@ -21,10 +21,10 @@
 <body>
 <table style="width: 60%">
 	<tr>
-		<td>날짜</td><td>총 수입</td><td>총 지출</td><td>total</td>
+		<td>날 짜</td><td>총 수입</td><td>총 지출</td><td>합 계</td>
 	</tr>	
 	<c:set var="TotalSum" value="0"></c:set>
-	<c:forEach var="YearList"  items="${statisticsYearList }">
+	<c:forEach var="YearList"  items="${YearList }">
 		<tr class="statisticsYear" id="${YearList.statisticsYear}">				
 			<td>${YearList.statisticsYear}년도 ▶</td>
 			<td><fmt:formatNumber pattern="#,###">${YearList.statisticsInYearSum}</fmt:formatNumber> 원</td>
@@ -36,10 +36,10 @@
 		</tr>
 		<c:forEach var="MonthList"  items="${YearList.statisticsMonthPrint }">
 			<tr>
-				<td align="center">${MonthList } 월</td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td align="center">${MonthList.statisticsMonthList } 월 ▶</td>
+				<td><fmt:formatNumber pattern="#,###">${MonthList.statisticsInMonthSum }</fmt:formatNumber> 원</td>
+				<td><fmt:formatNumber pattern="#,###">${MonthList.statisticsExMonthSum }</fmt:formatNumber> 원</td>
+				<td><fmt:formatNumber pattern="#,###">${MonthList.statisticsTotalMonthSum }</fmt:formatNumber> 원</td>
 			</tr>
 		</c:forEach>
 	</c:forEach>
