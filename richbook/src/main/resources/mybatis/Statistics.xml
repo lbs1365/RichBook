@@ -17,6 +17,7 @@
 		select count(exDate) from extable where memNo = #{memNo} 
 			and exDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
 	</select>
+	
 	<select id="StatisticsInYearSum" parameterType="Statistics" resultType="long">		
 		select sum(inSum) from intable where memNo = #{memNo} 
 			and inDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
@@ -25,4 +26,26 @@
 		select  sum(exSum) from extable where memNo = #{memNo} 
 			and exDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
 	</select>
+	
+	<select id="InStatisticsMonth" parameterType="Statistics" resultType="int">		
+		select count(inDate) from intable where memNo = #{memNo} 
+			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
+				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	</select>
+	<select id="ExStatisticsMonth" parameterType="Statistics" resultType="int">		
+		select count(exDate) from extable where memNo = #{memNo} 
+			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
+				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	</select>
+	
+	<select id="InStatisticsMonthSum" parameterType="Statistics" resultType="long">		
+		select sum(inSum) from intable where memNo = #{memNo} 
+			and inDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
+				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	</select>
+	<select id="ExStatisticsMonthSum" parameterType="Statistics" resultType="long">		
+		select sum(exSum) from extable where memNo = #{memNo} 
+			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' 
+				and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}
+	</select>	
 </mapper>

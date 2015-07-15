@@ -29,5 +29,17 @@ public class StatisticsDaoImpl implements StatisticsDao{
 	public long StatisticsExYearSum(Statistics stat) {
 		return session.selectOne("StatisticsExYearSum",stat);
 	}
+	public int InStatisticsMonth(Statistics stat) {
+		return session.selectOne("InStatisticsMonth",stat);
+	}
+	public int ExStatisticsMonth(Statistics stat) {
+		return session.selectOne("ExStatisticsMonth",stat);
+	}
+	public long StatisticsInMonthSum(Statistics stat) {
+		return session.selectOne("InStatisticsMonthSum",stat);
+	}
+	public long StatisticsExMonthSum(Statistics stat) {
+		return session.selectOne("ExStatisticsMonthSum",stat);
+	}
 
 }
