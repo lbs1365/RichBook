@@ -11,12 +11,43 @@
 <script type="text/javascript">
 	$(function(){
 		$('.statisticsYear').css('cursor', 'pointer');
-		$('.statisticsYear').click(function() {
-			var index = $(this).attr('id');
-			for(var i = 0; i<=index; i++){
-				alert($(this).attr('id'));
-				$(this).next().css('display', 'none');		
-			};			
+		$('.statisticsMonth').css('cursor', 'pointer');
+		$('.statisticsDay').css('cursor', 'pointer');
+		$('.statisticsYear').click(function() {			
+			var Monthindex = 12;
+			var dayindex = 31;
+			var dayListindex = 30;						 
+			for(var i=0; i<Monthindex; i++){
+				if($('.statisticsMonth:eq('+i+')').is(':hidden')){
+					$('.statisticsMonth').eq(i).show();					
+				}else{
+					$('.statisticsMonth').eq(i).hide();
+				}						
+				for(var j=0; j<dayindex; j++){
+					$('.statisticsDay').eq(j).hide();
+					for(var z=0; z<dayListindex; z++){
+						$('.statisticsDayListSub1').eq(z).hide();
+						$('.statisticsDayListSub2').eq(z).hide();
+						$('.statisticsDayListCon').eq(z).hide();					
+					};
+				};							
+			};
+		});
+		$('.statisticsMonth').click(function() {						
+			var dayindex = 31;
+			var dayListindex = 30;									
+				for(var j=0; j<dayindex; j++){
+					if($('.statisticsDay:eq('+j+')').is(':hidden')){
+						$('.statisticsDay').eq(j).show();
+					}else{
+						$('.statisticsDay').eq(j).hide();
+					}
+					for(var z=0; z<dayListindex; z++){
+						$('.statisticsDayListSub1').eq(z).hide();
+						$('.statisticsDayListSub2').eq(z).hide();
+						$('.statisticsDayListCon').eq(z).hide();						
+					};
+				};			
 		});
 	});	
 </script>
@@ -24,40 +55,36 @@
 <body>
 <table style="width: 100%" border="1">
 	<tr>
-		<td>날 짜</td><td>총 수입</td><td>총 지출</td><td>합 계</td><td colspan="4"></td>
+		<td colspan="2">날 짜</td><td colspan="2">총 수입</td><td colspan="2">총 지출</td><td colspan="2">합 계</td>
 	</tr>	
-	<c:set var="TotalSum" value="0"/>
-	<c:set var="index" value="${statsList.size() }"/>
+	<c:set var="TotalSum" value="0"/>	
 	<c:forEach var="statsList"  items="${statsList }">		
-		<tr class="statisticsYear" id="${index }">				
-			<td>${statsList.statisticsYear}년도 ▼</td>
-			<td><fmt:formatNumber pattern="#,###">${statsList.statisticsInYearSum}</fmt:formatNumber> 원</td>
-			<td><fmt:formatNumber pattern="#,###">${statsList.statisticsExYearSum}</fmt:formatNumber> 원</td>
-			<td>
+		<tr class="statisticsYear">				
+			<td colspan="2">${statsList.statisticsYear}년도 ▼</td>
+			<td colspan="2"><fmt:formatNumber pattern="#,###">${statsList.statisticsInYearSum}</fmt:formatNumber> 원</td>
+			<td colspan="2"><fmt:formatNumber pattern="#,###">${statsList.statisticsExYearSum}</fmt:formatNumber> 원</td>
+			<td colspan="2">
 			  	<fmt:formatNumber pattern="#,###">${statsList.statisticsTotalYearSum}</fmt:formatNumber> 원
 			  	<c:set var="TotalSum"  value="${TotalSum + statsList.statisticsTotalYearSum}"/>
-			</td>
-			<td colspan="4" width="50%"></td>		    		   	 
+			</td>					    		   	 
 		</tr>							
 		<c:forEach var="MonthList"  items="${statsList.statisticsMonthPrint }">
 			<tr class = "statisticsMonth">
-				<td align="center">${MonthList.statisticsMonthList } 월 ▼</td>
-				<td><fmt:formatNumber pattern="#,###">${MonthList.statisticsInMonthSum }</fmt:formatNumber> 원</td>
-				<td><fmt:formatNumber pattern="#,###">${MonthList.statisticsExMonthSum }</fmt:formatNumber> 원</td>
-				<td><fmt:formatNumber pattern="#,###">${MonthList.statisticsTotalMonthSum }</fmt:formatNumber> 원</td>
-				<td colspan="4" width="50%"></td>
+				<td align="center" colspan="2">${MonthList.statisticsMonthList } 월 ▼</td>
+				<td colspan="2"><fmt:formatNumber pattern="#,###">${MonthList.statisticsInMonthSum }</fmt:formatNumber> 원</td>
+				<td colspan="2"><fmt:formatNumber pattern="#,###">${MonthList.statisticsExMonthSum }</fmt:formatNumber> 원</td>
+				<td colspan="2"><fmt:formatNumber pattern="#,###">${MonthList.statisticsTotalMonthSum }</fmt:formatNumber> 원</td>				
 			</tr>			
 			<c:forEach var="DayList"  items="${MonthList.statisticsDayPrint }">
-				<tr>
-					<td align="right">${DayList.statisticsDayList} 일 ▼</td>
-					<td><fmt:formatNumber pattern="#,###">${DayList.statisticsInDaySum }</fmt:formatNumber> 원</td>
-					<td><fmt:formatNumber pattern="#,###">${DayList.statisticsExDaySum }</fmt:formatNumber> 원</td>
-					<td><fmt:formatNumber pattern="#,###">${DayList.statisticsTotalDaySum }</fmt:formatNumber> 원</td>
-					<td colspan="4" width="50%"></td>
+				<tr class = "statisticsDay">
+					<td align="right" colspan="2">${DayList.statisticsDayList} 일 ▼</td>
+					<td colspan="2"><fmt:formatNumber pattern="#,###">${DayList.statisticsInDaySum }</fmt:formatNumber> 원</td>
+					<td colspan="2"><fmt:formatNumber pattern="#,###">${DayList.statisticsExDaySum }</fmt:formatNumber> 원</td>
+					<td colspan="2"><fmt:formatNumber pattern="#,###">${DayList.statisticsTotalDaySum }</fmt:formatNumber> 원</td>					
 				</tr>
 				
 				<c:forEach var="statisticsList"  items="${DayList.statisticsList }">
-					<tr>
+					<tr class = "statisticsDayListSub1">
 					<c:if test="${statisticsList.inSum != 0}">
 						<td colspan="4" align="center">상세 수입 ▼</td>
 					</c:if>
@@ -71,7 +98,7 @@
 						<td colspan="4"></td>
 					</c:if>	
 					</tr>
-					<tr>
+					<tr class = "statisticsDayListSub2">
 					<c:if test="${statisticsList.inSum != 0}">
 						<td>분 류</td>
 						<td>금 액</td>
@@ -91,7 +118,7 @@
 						<td colspan="4" width="50%"></td>						
 					</c:if>								
 					</tr>
-					<tr>
+					<tr class = "statisticsDayListCon">
 						<td>${statisticsList.imtName }</td>
 						<td>
 							<c:if test="${statisticsList.inSum != 0}">						
