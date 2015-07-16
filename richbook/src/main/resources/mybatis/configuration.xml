@@ -9,7 +9,7 @@
 		<typeAlias alias="Memo" type="model.Memo" />	
 		<typeAlias alias="Ex" type="model.Ex" />
 		<typeAlias alias="ExMet" type="model.ExMet" />
-		<typeAlias alias="Statistics" type="model.Statistics" />	
+		<typeAlias alias="Statistics" type="model.Statistics" />		
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/Member.xml" />

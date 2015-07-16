@@ -10,8 +10,15 @@
 		<result property="statisticsMonth" column="statisticsMonth" />
 		<result property="statisticsMonthList" column="statisticsMonthList" />
 		<result property="statisticsDay" column="statisticsDay" />
-	</resultMap>
-			
+		<result property="imtNo" column="imtNo" />
+		<result property="inSum" column="inSum" />
+		<result property="inCon" column="inCon" />		
+		<result property="inEtc" column="inEtc" />
+		<result property="emtNo" column="emtNo" />
+		<result property="exSum" column="exSum" />
+		<result property="exCon" column="exCon" />
+		<result property="exEtc" column="exEtc" />		
+	</resultMap>			
 	<select id="InStatisticsYear" parameterType="Statistics" resultMap="StatisticsResult" >		
 		select distinct to_char(inDate,'YYYY') as "statisticsYear" from intable where memNo = #{memNo}
 			order by to_char(inDate,'YYYY') desc
@@ -19,9 +26,7 @@
 	<select id="ExStatisticsYear" parameterType="Statistics" resultMap="StatisticsResult">		
 		select distinct to_char(exDate,'YYYY') as "statisticsYear" from extable where memNo = #{memNo}
 			order by to_char(exDate,'YYYY') desc
-	</select>
-	
-	
+	</select>	
 	<select id="InStatisticsYearSum" parameterType="Statistics" resultType="long">		
 		select nvl(sum(inSum),0) from intable where memNo = #{memNo} 
 			and inDate between #{statisticsYear}||'-01-01' and #{statisticsYear}||'-12-31'
@@ -61,4 +66,31 @@
 			and exDate between #{statisticsYear}||'-'||#{statisticsMonth}||'-01' and #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay} 
 				order by to_char(exDate,'DD') desc		
 	</select>
+	
+	<select id="InStatisticsDaySum" parameterType="Statistics" resultType="long">		
+		select nvl(sum(inSum),0) from intable where memNo = #{memNo}			
+			and inDate = #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}			
+	</select>
+	<select id="ExStatisticsDaySum" parameterType="Statistics" resultType="long">		
+		select  nvl(sum(exSum),0) from extable where memNo = #{memNo}		
+			and exDate = #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}			
+	</select>
+	
+	<select id="InStatisticsList" parameterType="Statistics" resultMap="StatisticsResult">		
+		select * from intable where memNo = #{memNo}			
+			and inDate = #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}			
+	</select>
+	<select id="ExStatisticsList" parameterType="Statistics" resultMap="StatisticsResult">		
+		select * from extable where memNo = #{memNo}		
+			and exDate = #{statisticsYear}||'-'||#{statisticsMonth}||'-'||#{statisticsDay}			
+	</select>
+	
+	<select id="StatisticsImtNoChk" parameterType="Statistics" resultType="String" >
+		select imtName from inmet where memNo=#{memNo} and imtNo=#{imtNo}
+	</select>
+	
+	<select id="StatisticsEmtNoChk" parameterType="Statistics" resultType="String">
+		select emtName from exmet where memNo=#{memNo} and emtNo=#{emtNo}
+	</select>
+	
 </mapper>

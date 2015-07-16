@@ -16,6 +16,7 @@
 		/* response.sendRedirect("MemoList.do"); */ 
 		/* response.sendRedirect("send.do"); */
 		response.sendRedirect("StatisticsList.do");
+		
 	%>
 </body>
 </html>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Statistics;
+import model.StatisticsList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import dao.StatisticsDao;
 @Service
 public class StatisticsServiceImpl implements StatisticsService{
 	@Autowired
-	StatisticsDao statd;
+	StatisticsDao statd;	
 	public List<Integer> StatisticsYearList(Statistics stat) {
 		List<Statistics> inStatisticsYearList = statd.InStatisticsYearList(stat);
 		List<Statistics> exStatisticsYearList = statd.ExStatisticsYearList(stat);
@@ -149,8 +150,65 @@ public class StatisticsServiceImpl implements StatisticsService{
 				}				
 			}
 		}		
-		System.out.println(statisticsDayList);
 		return statisticsDayList;
+	}
+	public long StatisticsInDaySum(Statistics stat) {		
+		return statd.StatisticsInDaySum(stat);
+	}
+	public long StatisticsExDaySum(Statistics stat) {		
+		return statd.StatisticsExDaySum(stat);
+	}
+	public List<StatisticsList> StatisticsList(Statistics stat) {		
+		List<Statistics> inStatisticsList = statd.InStatisticsList(stat);
+		List<Statistics> exStatisticsList = statd.ExStatisticsList(stat);
+		List<StatisticsList> StatisticsList = new ArrayList<StatisticsList>();
+		int i = 0;
+		int j = 0;
+		while(true){
+			StatisticsList statList = new StatisticsList();
+			if(inStatisticsList.size() == i && exStatisticsList.size() == j){				
+				break;
+			}else if(inStatisticsList.size() == i){
+				for(int z=j; z < exStatisticsList.size(); z++){
+					stat.setMemNo(exStatisticsList.get(z).getMemNo());
+					stat.setEmtNo(exStatisticsList.get(z).getEmtNo());
+					statList.setEmtName(statd.StatisticsEmtNoChk(stat));
+					statList.setExCon(exStatisticsList.get(z).getExCon());
+					statList.setExSum(exStatisticsList.get(z).getExSum());
+					statList.setExEtc(exStatisticsList.get(z).getExEtc());
+					StatisticsList.add(statList);					
+				}
+				break;
+			}else if(exStatisticsList.size() == j){
+				for(int z=i; z < inStatisticsList.size(); z++){					
+					stat.setMemNo(inStatisticsList.get(z).getMemNo());
+					stat.setImtNo(inStatisticsList.get(z).getImtNo());					
+					statList.setImtName(statd.StatisticsImtNoChk(stat));
+					statList.setInCon(inStatisticsList.get(z).getInCon());
+					statList.setInSum(inStatisticsList.get(z).getInSum());
+					statList.setInEtc(inStatisticsList.get(z).getInEtc());
+					StatisticsList.add(statList);					
+				}
+				break;
+			}else{				
+				stat.setEmtNo(exStatisticsList.get(j).getEmtNo());
+				stat.setMemNo(exStatisticsList.get(j).getMemNo());			
+				statList.setEmtName(statd.StatisticsEmtNoChk(stat));
+				statList.setExCon(exStatisticsList.get(j).getExCon());
+				statList.setExSum(exStatisticsList.get(j).getExSum());
+				statList.setExEtc(exStatisticsList.get(j).getExEtc());
+				stat.setImtNo(inStatisticsList.get(i).getImtNo());
+				stat.setMemNo(inStatisticsList.get(i).getMemNo());
+				statList.setImtName(statd.StatisticsImtNoChk(stat));
+				statList.setInCon(inStatisticsList.get(i).getInCon());
+				statList.setInSum(inStatisticsList.get(i).getInSum());
+				statList.setInEtc(inStatisticsList.get(i).getInEtc());
+				StatisticsList.add(statList);				
+				i++;
+				j++;
+			}			
+		}		
+		return StatisticsList;
 	}	
 	
 }

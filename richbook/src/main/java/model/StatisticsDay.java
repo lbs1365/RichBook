@@ -1,10 +1,13 @@
 package model;
 
+import java.util.List;
+
 public class StatisticsDay {
 	private int statisticsDayList;
 	private long statisticsInDaySum;
 	private long statisticsExDaySum;
 	private long statisticsTotalDaySum;
+	private List<StatisticsList> statisticsList;
 	
 	public int getStatisticsDayList() {
 		return statisticsDayList;
@@ -29,5 +32,11 @@ public class StatisticsDay {
 	}
 	public void setStatisticsTotalDaySum(long statisticsTotalDaySum) {
 		this.statisticsTotalDaySum = statisticsTotalDaySum;
+	}
+	public List<StatisticsList> getStatisticsList() {
+		return statisticsList;
+	}
+	public void setStatisticsList(List<StatisticsList> statisticsList) {
+		this.statisticsList = statisticsList;
 	}
 }

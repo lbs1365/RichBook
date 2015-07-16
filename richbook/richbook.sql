@@ -141,7 +141,12 @@ select nvl(sum(inSum),0) from intable where memNo = 1
 		and '2015-07-31';	
 	
 select distinct to_char(inDate,'YYYY') as "statisticsYear" from intable where memNo = 1 order by to_char(inDate,'YYYY');
-select distinct to_char(inDate,'MM') as "statisticsMonth" from intable where memNo = 1 order by to_char(inDate,'MM') desc;
+select distinct to_char(exDate,'MM') as "statisticsMonth" from extable where memNo = 1 and exDate between '2015-01-01' and '2015-12-31' order by to_char(exDate,'MM') desc;
 select distinct to_char(inDate,'DD') as "statisticsDay" from intable where memNo = 1 and inDate between '2015-06-01' and '2015-06-30' order by to_char(inDate,'DD') desc;
+select distinct to_char(exDate,'DD') as "statisticsDay" from extable where memNo = 1 and exDate between '2015-06-01' and '2015-06-30' order by to_char(exDate,'DD') desc;
 
+select * from intable where memNo = 1 and inDate = '2015-07-14';
+select * from extable where memNo = 1 and exDate = '2015-07-15';
+select * from extable where memNo = 1 and exDate = '2015-06-10';
 
+select * from exmet where memNo=1 and emtNo=2;
