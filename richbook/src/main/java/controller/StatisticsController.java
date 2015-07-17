@@ -24,7 +24,7 @@ public class StatisticsController {
 	@Autowired
 	StatisticsService stats;
 	@RequestMapping(value="StatisticsList")
-	public String statisticsList(Statistics statisticsPageing, Model model){
+	public String statisticsList(Model model){
 		long InYearSum = 0;
 		long ExYearSum = 0;
 		long TotalYearSum = 0;			
@@ -35,19 +35,19 @@ public class StatisticsController {
 		long ExDaySum = 0;
 		long TotalDaySum = 0;
 		int CalstatisticsDay = 0;
+		int yearIndex = 0;
+		int monthEnd = 0;		
 		List<Integer> YearList = new ArrayList<Integer>();
 		List<Integer> MonthList = new ArrayList<Integer>();
 		List<Integer> DayList = new ArrayList<Integer>();
-		List<Statistics> statisticsList = new ArrayList<Statistics>();
-		Calendar cal = Calendar.getInstance();
-		int month = cal.get(Calendar.MONTH);
-		int year = cal.get(Calendar.YEAR);
-		int day = cal.get(Calendar.DATE);
+		List<Statistics> statisticsList = new ArrayList<Statistics>();			
 		Statistics stat = new Statistics();		
 		stat.setMemNo(1);
 		YearList = stats.StatisticsYearList(stat);
 		
 		for(int i=0 ; i<YearList.size(); i++){
+			int DayEnd = 0;
+			int DayIndex = 0;
 			Statistics statList = new Statistics();
 			statList.setMemNo(1);
 			statList.setStatisticsYear(YearList.get(i));
@@ -60,6 +60,8 @@ public class StatisticsController {
 			MonthList = stats.StatisticsMonthList(statList);			
 			List<StatisticsMonth> statsMonthList = new ArrayList<StatisticsMonth>();					
 				for(int j=0 ; j<MonthList.size(); j++){
+					int ListEnd = 0;
+					int ListIndex = 0;
 					StatisticsMonth statMonth = new StatisticsMonth();
 					if(MonthList.get(j)<10){
 						statList.setStatisticsMonth("0"+MonthList.get(j));						
@@ -89,13 +91,31 @@ public class StatisticsController {
 						statDay.setStatisticsExDaySum(ExDaySum);
 						statDay.setStatisticsTotalDaySum(TotalDaySum);
 						statisticsDayList = stats.StatisticsList(statList);
-						statDay.setStatisticsList(statisticsDayList);					
-						statsDayList.add(statDay);					
-					}
+						statDay.setStatisticsList(statisticsDayList);
+						ListIndex +=1;
+						int ListStart = statsDayList.size();
+						ListEnd += ListStart;
+						statDay.setListEnd(ListEnd);
+						statDay.setListStart(ListStart);
+						statDay.setListIndex(ListIndex);						
+						statsDayList.add(statDay);						
+					}					
 					statMonth.setStatisticsDayPrint(statsDayList);
-					statsMonthList.add(statMonth);
+					DayIndex +=1;
+					int DayStart = statsDayList.size();
+					DayEnd += DayStart;
+					statMonth.setDayEnd(DayEnd);
+					statMonth.setDayStart(DayStart);
+					statMonth.setDayIndex(DayIndex);
+					statsMonthList.add(statMonth);				
 				}			
-				statList.setStatisticsMonthPrint(statsMonthList);			
+				statList.setStatisticsMonthPrint(statsMonthList);
+				yearIndex += 1; 
+				int monthStart = statsMonthList.size();
+				monthEnd += monthStart;
+				statList.setMonthEnd(monthEnd);
+				statList.setMonthStart(monthStart);
+				statList.setYearIndex(yearIndex);				
 				statisticsList.add(statList);		
 		}	
 		model.addAttribute("statsList",statisticsList);		

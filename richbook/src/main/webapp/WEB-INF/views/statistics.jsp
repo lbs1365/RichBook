@@ -14,40 +14,67 @@
 		$('.statisticsMonth').css('cursor', 'pointer');
 		$('.statisticsDay').css('cursor', 'pointer');
 		$('.statisticsYear').click(function() {			
-			var Monthindex = 12;
-			var dayindex = 31;
-			var dayListindex = 30;						 
-			for(var i=0; i<Monthindex; i++){
+			var MonthIndex = $(this).attr('id');
+			var MonthIndex2 = parseInt(MonthIndex)-1;
+			var MonthEnd =	$('.statisticsYearEnd').eq(MonthIndex2).attr('id');			
+			var MonthStart = $('.statisticsYearStart').eq(MonthIndex2).attr('id');			
+			var MonthTotal = parseInt(MonthEnd) - parseInt(MonthStart);
+			var thisIndex = $(this).index();
+			alert(thisIndex);
+			var startIndex = parseInt(thisIndex)+1;
+			alert(startIndex);
+			var nextIndex = $('.statisticsYear').eq(startIndex).index();
+			alert(nextIndex);
+			var dayStart = 0;
+			var dayEnd = 31;
+			var dayListStart = 0;
+			var dayListEnd = 30;						 
+			for(var i=MonthTotal; i<MonthEnd; i++){
 				if($('.statisticsMonth:eq('+i+')').is(':hidden')){
 					$('.statisticsMonth').eq(i).show();					
 				}else{
-					$('.statisticsMonth').eq(i).hide();
-				}						
-				for(var j=0; j<dayindex; j++){
-					$('.statisticsDay').eq(j).hide();
-					for(var z=0; z<dayListindex; z++){
-						$('.statisticsDayListSub1').eq(z).hide();
-						$('.statisticsDayListSub2').eq(z).hide();
-						$('.statisticsDayListCon').eq(z).hide();					
-					};
-				};							
+					$('.statisticsMonth').eq(i).hide();					
+					if(nextIndex == null){
+						$(this).nextAll().hide();
+					}else{
+						for(var j=startIndex; j<nextIndex; j++){
+							$('tr').eq(j).hide();						
+						};	
+					}											
+				}
 			};
 		});
-		$('.statisticsMonth').click(function() {						
-			var dayindex = 31;
-			var dayListindex = 30;									
-				for(var j=0; j<dayindex; j++){
-					if($('.statisticsDay:eq('+j+')').is(':hidden')){
-						$('.statisticsDay').eq(j).show();
+		$('.statisticsMonth').click(function() {			
+			var thisIndex = $(this).index();
+			var dayStartIndex = parseInt(thisIndex)+1;
+			var dayStart =$(this).attr('title');						
+			var dayTotal = parseInt(thisIndex) + parseInt(dayStart)*4;			
+			var dayListStart = 0;
+			var dayListEnd = 30;													
+				for(var j=dayStartIndex; j<=dayTotal; j++){
+					if($('tr:eq('+j+')').is(':hidden')){
+						$('tr').eq(j).show();
 					}else{
-						$('.statisticsDay').eq(j).hide();
+						$('tr').eq(j).hide();
 					}
-					for(var z=0; z<dayListindex; z++){
+					for(var z=dayListStart; z<dayListEnd; z++){
 						$('.statisticsDayListSub1').eq(z).hide();
 						$('.statisticsDayListSub2').eq(z).hide();
 						$('.statisticsDayListCon').eq(z).hide();						
 					};
 				};			
+		});
+		$('.statisticsDay').click(function() {			
+			var dayListIndex = $(this).index();
+			var dayListStart = parseInt(dayListIndex) + 1;
+			var dayListEnd = parseInt(dayListIndex) + 3 ;		
+			for(var z=dayListStart; z<=dayListEnd; z++){					
+				if($('tr:eq('+z+')').is(':hidden')){
+					$('tr').eq(z).show();					
+				}else{
+					$('tr').eq(z).hide();					
+				}
+			};						
 		});
 	});	
 </script>
@@ -59,8 +86,11 @@
 	</tr>	
 	<c:set var="TotalSum" value="0"/>	
 	<c:forEach var="statsList"  items="${statsList }">		
-		<tr class="statisticsYear">				
-			<td colspan="2">${statsList.statisticsYear}년도 ▼</td>
+		<tr class="statisticsYear" id="${statsList.yearIndex}">
+			<td colspan="2">
+				<div class="statisticsYearStart" id="${statsList.monthStart}"></div>
+				<div class="statisticsYearEnd" id="${statsList.monthEnd}"></div>
+				${statsList.statisticsYear}년도 ▼</td>
 			<td colspan="2"><fmt:formatNumber pattern="#,###">${statsList.statisticsInYearSum}</fmt:formatNumber> 원</td>
 			<td colspan="2"><fmt:formatNumber pattern="#,###">${statsList.statisticsExYearSum}</fmt:formatNumber> 원</td>
 			<td colspan="2">
@@ -69,14 +99,18 @@
 			</td>					    		   	 
 		</tr>							
 		<c:forEach var="MonthList"  items="${statsList.statisticsMonthPrint }">
-			<tr class = "statisticsMonth">
-				<td align="center" colspan="2">${MonthList.statisticsMonthList } 월 ▼</td>
+			<tr class = "statisticsMonth" id="${MonthList.dayIndex}" title="${MonthList.dayStart}" tabindex="${MonthList.dayEnd}">
+				<td align="center" colspan="2">
+					<div class="statisticsMonthStart" id="${MonthList.dayStart}"></div>
+					<div class="statisticsMonthEnd" id="${MonthList.dayEnd}"></div>
+					${MonthList.statisticsMonthList } 월 ▼
+				</td>
 				<td colspan="2"><fmt:formatNumber pattern="#,###">${MonthList.statisticsInMonthSum }</fmt:formatNumber> 원</td>
 				<td colspan="2"><fmt:formatNumber pattern="#,###">${MonthList.statisticsExMonthSum }</fmt:formatNumber> 원</td>
 				<td colspan="2"><fmt:formatNumber pattern="#,###">${MonthList.statisticsTotalMonthSum }</fmt:formatNumber> 원</td>				
 			</tr>			
 			<c:forEach var="DayList"  items="${MonthList.statisticsDayPrint }">
-				<tr class = "statisticsDay">
+				<tr class = "statisticsDay" id="${DayList.listIndex}" title="${DayList.listStart}" tabindex="${DayList.listEnd}">
 					<td align="right" colspan="2">${DayList.statisticsDayList} 일 ▼</td>
 					<td colspan="2"><fmt:formatNumber pattern="#,###">${DayList.statisticsInDaySum }</fmt:formatNumber> 원</td>
 					<td colspan="2"><fmt:formatNumber pattern="#,###">${DayList.statisticsExDaySum }</fmt:formatNumber> 원</td>

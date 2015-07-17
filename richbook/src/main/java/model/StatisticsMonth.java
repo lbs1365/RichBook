@@ -9,6 +9,9 @@ public class StatisticsMonth {
 	private long statisticsExMonthSum;
 	private long statisticsTotalMonthSum;
 	private List<StatisticsDay> statisticsDayPrint;
+	private int dayStart;
+	private int dayEnd;
+	private int dayIndex;
 	
 	public int getStatisticsMonthList() {
 		return statisticsMonthList;
@@ -40,4 +43,23 @@ public class StatisticsMonth {
 	public void setStatisticsDayPrint(List<StatisticsDay> statisticsDayPrint) {
 		this.statisticsDayPrint = statisticsDayPrint;
 	}
+	public int getDayStart() {
+		return dayStart;
+	}
+	public void setDayStart(int dayStart) {
+		this.dayStart = dayStart;
+	}
+	public int getDayEnd() {
+		return dayEnd;
+	}
+	public void setDayEnd(int dayEnd) {
+		this.dayEnd = dayEnd;
+	}
+	public int getDayIndex() {
+		return dayIndex;
+	}
+	public void setDayIndex(int dayIndex) {
+		this.dayIndex = dayIndex;
+	}
+	
 }

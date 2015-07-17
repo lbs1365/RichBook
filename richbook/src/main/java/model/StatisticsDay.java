@@ -8,6 +8,9 @@ public class StatisticsDay {
 	private long statisticsExDaySum;
 	private long statisticsTotalDaySum;
 	private List<StatisticsList> statisticsList;
+	private int listStart;
+	private int listEnd;
+	private int listIndex;
 	
 	public int getStatisticsDayList() {
 		return statisticsDayList;
@@ -39,4 +42,23 @@ public class StatisticsDay {
 	public void setStatisticsList(List<StatisticsList> statisticsList) {
 		this.statisticsList = statisticsList;
 	}
+	public int getListStart() {
+		return listStart;
+	}
+	public void setListStart(int listStart) {
+		this.listStart = listStart;
+	}
+	public int getListEnd() {
+		return listEnd;
+	}
+	public void setListEnd(int listEnd) {
+		this.listEnd = listEnd;
+	}
+	public int getListIndex() {
+		return listIndex;
+	}
+	public void setListIndex(int listIndex) {
+		this.listIndex = listIndex;
+	}
+	
 }

@@ -165,11 +165,11 @@ public class StatisticsServiceImpl implements StatisticsService{
 		int i = 0;
 		int j = 0;
 		while(true){
-			StatisticsList statList = new StatisticsList();
 			if(inStatisticsList.size() == i && exStatisticsList.size() == j){				
 				break;
 			}else if(inStatisticsList.size() == i){
 				for(int z=j; z < exStatisticsList.size(); z++){
+					StatisticsList statList = new StatisticsList();
 					stat.setMemNo(exStatisticsList.get(z).getMemNo());
 					stat.setEmtNo(exStatisticsList.get(z).getEmtNo());
 					statList.setEmtName(statd.StatisticsEmtNoChk(stat));
@@ -180,7 +180,8 @@ public class StatisticsServiceImpl implements StatisticsService{
 				}
 				break;
 			}else if(exStatisticsList.size() == j){
-				for(int z=i; z < inStatisticsList.size(); z++){					
+				for(int z=i; z < inStatisticsList.size(); z++){
+					StatisticsList statList = new StatisticsList();
 					stat.setMemNo(inStatisticsList.get(z).getMemNo());
 					stat.setImtNo(inStatisticsList.get(z).getImtNo());					
 					statList.setImtName(statd.StatisticsImtNoChk(stat));
@@ -190,7 +191,8 @@ public class StatisticsServiceImpl implements StatisticsService{
 					StatisticsList.add(statList);					
 				}
 				break;
-			}else{				
+			}else{
+				StatisticsList statList = new StatisticsList();
 				stat.setEmtNo(exStatisticsList.get(j).getEmtNo());
 				stat.setMemNo(exStatisticsList.get(j).getMemNo());			
 				statList.setEmtName(statd.StatisticsEmtNoChk(stat));
